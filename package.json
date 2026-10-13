@@ -1,0 +1,17 @@
+{
+  "name": "cb-exam-alarm",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CB Exam Alarm Android wrapper and native alarm support",
+  "scripts": {
+    "build:web": "mkdir -p web && cp index.html app.js styles.css web/ && cp -f supabase-config.js web/ 2>/dev/null || true",
+    "android:sync": "npm run build:web && cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "6.2.0",
+    "@capacitor/core": "6.2.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "6.2.0"
+  }
+}
