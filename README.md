@@ -19,7 +19,7 @@ The cloud integration uses **Supabase Auth + Postgres + Row Level Security (RLS)
 2. In **SQL Editor**, open a new query, paste the complete contents of [`supabase/schema.sql`](supabase/schema.sql), and run it.
 3. In **Project Settings → API** (the exact menu labels may change), copy the **Project URL** and the **publishable key** (or legacy anon key).
 4. Edit [`supabase-config.js`](supabase-config.js). Replace `https://YOUR_PROJECT_REF.supabase.co` and `YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY` with those values. This browser file is intentionally public: use only the publishable/anon key. **Never place a service-role key, database password, or other secret in frontend code or Git.**
-5. In Supabase **Authentication → URL Configuration**, add your deployed site URL to the allowed Site URL / Redirect URLs, for example `https://YOUR-USERNAME.github.io/cb-alarm-app/`. Add your local development URL too if needed.
+5. In Supabase **Authentication → URL Configuration**, set **Site URL** to `https://starlit-cobbler-1fd9b0.netlify.app` and add `https://starlit-cobbler-1fd9b0.netlify.app/**` to **Redirect URLs** (or add the exact URL `https://starlit-cobbler-1fd9b0.netlify.app/`). Add `http://localhost:8000/**` only if you use the local development server.
 6. In **Authentication → Providers → Email**, keep email/password enabled. Email confirmation may be enabled; if it is, users must confirm their email before signing in.
 7. Deploy/redeploy the site, then click **Sign in to sync** → **Create account**. Sign in with the same account on another device to load that account's cloud-saved exam plan and alarms.
 
