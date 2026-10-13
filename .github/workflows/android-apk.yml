@@ -46,7 +46,7 @@ jobs:
           if "org.jetbrains.kotlin.android" not in s:
               if marker not in s:
                   raise SystemExit("Could not find Android app plugins block")
-              s = s.replace(marker, marker + "\\n    id 'org.jetbrains.kotlin.android' version '1.9.24'", 1)
+              s = s.replace(marker, marker + "\n    id 'org.jetbrains.kotlin.android' version '1.9.24'", 1)
               p.write_text(s)
           PY
       - name: Add native alarm implementation
