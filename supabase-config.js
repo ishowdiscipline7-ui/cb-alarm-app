@@ -7,6 +7,6 @@
  * or database passwords in this file. Row-level security protects user data.
  */
 window.CB_SUPABASE_CONFIG = {
-  url: "https://YOUR_PROJECT_REF.supabase.co",
+  url: "https://squrwnbwtmmnmtaxuoac.supabase.co",
   anonKey: "YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY"
 };
