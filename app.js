@@ -19,10 +19,51 @@
   function cloudPayload(){const copy=JSON.parse(JSON.stringify(state));copy.uploadedSound=null;return copy}
   function scheduleCloudSync(){if(!cloudSession||!cloudReady||!supabaseClient)return;clearTimeout(cloudTimer);cloudTimer=setTimeout(pushCloudState,900)}
   async function pushCloudState(){if(!cloudSession||!cloudReady||!supabaseClient)return;const snapshot=cloudPayload();try{const {data,error}=await supabaseClient.from('user_state').upsert({user_id:cloudSession.user.id,state:snapshot,updated_at:new Date().toISOString()},{onConflict:'user_id'}).select('updated_at').single();if(error)throw error;lastCloudTimestamp=data?.updated_at||null;setStorageStatus('Synced to your account')}catch(err){console.error('CB cloud sync failed',err);setStorageStatus('Saved here · cloud sync failed');toast('Cloud sync failed. Check Supabase setup and connection.')}}
-  async function pullCloudState(){if(!cloudSession||!supabaseClient)return;cloudReady=false;setStorageStatus('Syncing your study space…');try{const {data,error}=await supabaseClient.from('user_state').select('state,updated_at').eq('user_id',cloudSession.user.id).maybeSingle();if(error)throw error;if(data?.state&&typeof data.state==='object'){const remote=data.state;state={...defaults,...remote,alarms:Array.isArray(remote.alarms)?remote.alarms:[],streak:remote.streak&&typeof remote.streak==='object'?remote.streak:defaults.streak,settings:remote.settings&&typeof remote.settings==='object'?remote.settings:{},uploadedSound:state.uploadedSound||null};lastCloudTimestamp=data.updated_at||null;focusRemaining=(Number(state.focusMinutes)||25)*60;renderAll();renderFocus();toast('Your study space is synced')}else{cloudReady=true;await pushCloudState()}cloudReady=true;setStorageStatus('Synced to your account');subscribeCloud()}catch(err){console.error('CB cloud load failed',err);cloudReady=true;setStorageStatus('Saved here · cloud unavailable');toast('Could not load cloud data. Check your backend setup.')}}
+  async function pullCloudState(){
+    if(!cloudSession||!supabaseClient)return;
+    cloudReady=false;
+    const userId=cloudSession.user.id;
+    const previousOwner=localStorage.getItem(STORAGE_KEY+'-cloud-owner');
+    const switchingAccounts=!!previousOwner&&previousOwner!==userId;
+    if(switchingAccounts){
+      state=structuredClone(defaults);
+      focusRemaining=(Number(state.focusMinutes)||25)*60;
+      try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}catch(e){}
+      renderAll();renderFocus();
+    }
+    setStorageStatus('Syncing your study space…');
+    try{
+      const {data,error}=await supabaseClient.from('user_state').select('state,updated_at').eq('user_id',userId).maybeSingle();
+      if(error)throw error;
+      if(data?.state&&typeof data.state==='object'){
+        const remote=data.state;
+        state={...defaults,...remote,alarms:Array.isArray(remote.alarms)?remote.alarms:[],streak:remote.streak&&typeof remote.streak==='object'?remote.streak:defaults.streak,settings:remote.settings&&typeof remote.settings==='object'?remote.settings:{},uploadedSound:state.uploadedSound||null};
+        lastCloudTimestamp=data.updated_at||null;
+        focusRemaining=(Number(state.focusMinutes)||25)*60;
+        renderAll();renderFocus();toast('Your study space is synced');
+        try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}catch(e){}
+        setStorageStatus('Synced to your account');
+      }else if(switchingAccounts){
+        lastCloudTimestamp=null;
+        setStorageStatus('New account · changes will sync automatically');
+      }else{
+        cloudReady=true;
+        await pushCloudState();
+        setStorageStatus('Synced to your account');
+      }
+      localStorage.setItem(STORAGE_KEY+'-cloud-owner',userId);
+      cloudReady=true;
+      subscribeCloud();
+    }catch(err){
+      console.error('CB cloud load failed',err);
+      cloudReady=false;
+      setStorageStatus('Saved here · cloud unavailable');
+      toast('Could not load cloud data. Check your backend setup.');
+    }
+  }
   function subscribeCloud(){if(!supabaseClient||!cloudSession)return;if(cloudChannel)supabaseClient.removeChannel(cloudChannel);cloudChannel=supabaseClient.channel('cb-user-state-'+cloudSession.user.id).on('postgres_changes',{event:'*',schema:'public',table:'user_state',filter:'user_id=eq.'+cloudSession.user.id},payload=>{const row=payload.new;if(!row||row.updated_at===lastCloudTimestamp||!row.state)return;lastCloudTimestamp=row.updated_at;const remote=row.state;state={...defaults,...remote,alarms:Array.isArray(remote.alarms)?remote.alarms:[],streak:remote.streak&&typeof remote.streak==='object'?remote.streak:defaults.streak,settings:remote.settings&&typeof remote.settings==='object'?remote.settings:{},uploadedSound:state.uploadedSound||null};try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}catch(e){}focusRemaining=(Number(state.focusMinutes)||25)*60;renderAll();renderFocus();setStorageStatus('Synced to your account')}).subscribe()}
   async function handleAuthState(session){cloudSession=session||null;updateAccountButton();if(cloudSession){await pullCloudState()}else{cloudReady=false;if(cloudChannel&&supabaseClient){supabaseClient.removeChannel(cloudChannel);cloudChannel=null}setStorageStatus('Saved on this device')}}
-  async function signInOrSignUp(mode){if(!supabaseClient){setAuthError('Cloud is not configured yet. Follow the Supabase setup guide in README.md.');return}const email=$('authEmail').value.trim(),password=$('authPassword').value;if(!email||password.length<8){setAuthError('Enter a valid email and a password of at least 8 characters.');return}setAuthError('');$('signInBtn').disabled=true;$('signUpBtn').disabled=true;try{const result=mode==='signup'?await supabaseClient.auth.signUp({email,password}):await supabaseClient.auth.signInWithPassword({email,password});if(result.error)throw result.error;if(mode==='signup'&&!result.data.session){setAuthError('Account created. Check your email to confirm it, then sign in.');return}closeDialog('authDialog');if(result.data.session)await handleAuthState(result.data.session);toast(mode==='signup'?'Account created':'Signed in successfully')}catch(err){setAuthError(err.message||'Authentication failed. Please try again.')}finally{$('signInBtn').disabled=false;$('signUpBtn').disabled=false}}
+  async function signInOrSignUp(mode){if(!supabaseClient){setAuthError('Cloud is not configured yet. Follow the Supabase setup guide in README.md.');return}const email=$('authEmail').value.trim(),password=$('authPassword').value;if(!email||password.length<8){setAuthError('Enter a valid email and a password of at least 8 characters.');return}setAuthError('');$('signInBtn').disabled=true;$('signUpBtn').disabled=true;try{const result=mode==='signup'?await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:window.location.origin+window.location.pathname}}):await supabaseClient.auth.signInWithPassword({email,password});if(result.error)throw result.error;if(mode==='signup'&&!result.data.session){setAuthError('Account created. Check your email to confirm it, then sign in.');return}closeDialog('authDialog');if(result.data.session)await handleAuthState(result.data.session);toast(mode==='signup'?'Account created':'Signed in successfully')}catch(err){setAuthError(err.message||'Authentication failed. Please try again.')}finally{$('signInBtn').disabled=false;$('signUpBtn').disabled=false}}
   if($('accountBtn'))$('accountBtn').addEventListener('click',async()=>{if(cloudSession){if(confirm('Sign out of CB on this device? Your cloud data will remain saved.')){await supabaseClient.auth.signOut();cloudSession=null;cloudReady=false;updateAccountButton();setStorageStatus('Saved on this device');toast('Signed out')}}else{authMode='signin';$('authTitle').textContent='Sign in to CB';$('authDescription').textContent=cloudConfigured?'Securely sync your alarms and exam plan across devices.':'Configure Supabase using the README setup guide to enable accounts.';$('signUpBtn').textContent='Create account';$('signInBtn').textContent='Sign in →';setAuthError('');openDialog('authDialog')}});
   if($('authForm'))$('authForm').addEventListener('submit',e=>{e.preventDefault();signInOrSignUp('signin')});
   if($('signUpBtn'))$('signUpBtn').addEventListener('click',()=>signInOrSignUp('signup'));
