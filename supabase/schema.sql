@@ -32,8 +32,10 @@ create policy "Users can update their own CB state"
 -- access the row whose user_id matches their verified Supabase auth identity.
 
 -- Explicit least-privilege grants; RLS remains the row-level boundary.
-revoke all on public.user_state from anon;
-grant select, insert, update on public.user_state to authenticated;
+-- Revoke inherited/existing broad privileges first (especially TRUNCATE and DELETE,
+-- which are not constrained by row-level security), then grant only app operations.
+revoke all privileges on table public.user_state from public, anon, authenticated;
+grant select, insert, update on table public.user_state to authenticated;
 
 -- Enable realtime row-change events for cross-device sync (safe to re-run).
 do $$
