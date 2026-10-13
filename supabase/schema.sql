@@ -30,3 +30,21 @@ create policy "Users can update their own CB state"
 
 -- No public/anonymous policies are created. Authenticated users can only
 -- access the row whose user_id matches their verified Supabase auth identity.
+
+-- Explicit least-privilege grants; RLS remains the row-level boundary.
+revoke all on public.user_state from anon;
+grant select, insert, update on public.user_state to authenticated;
+
+-- Enable realtime row-change events for cross-device sync (safe to re-run).
+do $$
+begin
+  if exists (select 1 from pg_publication where pubname = 'supabase_realtime')
+     and not exists (
+       select 1 from pg_publication_tables
+       where pubname = 'supabase_realtime'
+         and schemaname = 'public'
+         and tablename = 'user_state'
+     ) then
+    execute 'alter publication supabase_realtime add table public.user_state';
+  end if;
+end $$;
