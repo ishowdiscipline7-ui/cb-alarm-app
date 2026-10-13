@@ -300,3 +300,12 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .toast{background:#eee!important;color:#050505!important}
 ::selection{background:#555!important;color:#fff!important}
 @media(max-width:620px){body{background:#000!important}.stat-card,.panel{box-shadow:none!important}}
+
+/* Final monochrome polish: no colored accent leftovers */
+.welcome-row h1 span{color:#f5f5f5!important}
+.soft-badge{background:#111!important;border:1px solid #333!important;color:#eee!important}
+.week-day span{background:#111!important;border-color:#333!important;color:#ddd!important}
+.week-day.done span,.week-day.today span{background:#202020!important;border-color:#666!important;color:#fff!important;box-shadow:none!important}
+.online-dot,.live-status span,.footer-dot{background:#ddd!important}
+.avatar{background:#171717!important;color:#eee!important}
+
