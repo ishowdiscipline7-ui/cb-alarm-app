@@ -1,12 +1,5 @@
 {
   "appId": "com.clearbefore.cb",
   "appName": "CB Exam Alarm",
-  "webDir": "web",
-  "server": {
-    "url": "https://starlit-cobbler-1fd9b0.netlify.app",
-    "cleartext": false,
-    "allowNavigation": [
-      "starlit-cobbler-1fd9b0.netlify.app"
-    ]
-  }
+  "webDir": "web"
 }
