@@ -52,7 +52,7 @@
   document.querySelectorAll('.preset').forEach(b=>b.addEventListener('click',()=>{stopFocus();state.focusMinutes=Number(b.dataset.minutes);focusRemaining=state.focusMinutes*60;saveState();document.querySelectorAll('.preset').forEach(x=>x.classList.toggle('active',x===b));renderFocus()}));
   $('markWakeBtn').addEventListener('click',()=>{const today=localDateKey(),dates=new Set(state.streak.dates||[]);if(dates.has(today)){toast('Already checked in today.');return}dates.add(today);state.streak.dates=[...dates].sort().slice(-90);let count=0;const d=new Date();while(state.streak.dates.includes(localDateKey(d))){count++;d.setDate(d.getDate()-1)}state.streak.count=count;saveState();renderWeek();toast('Check-in complete. Streak: '+count+' day'+(count===1?'':'s')+'!')});
   $('limitationsBtn').addEventListener('click',()=>openDialog('infoDialog'));
-  document.querySelectorAll('[data-nav]').forEach(a=>a.addEventListener('click',()=>{document.querySelectorAll('[data-nav]').forEach(n=>n.classList.toggle('active',n===a));$('pageLabel').textContent=a.textContent.trim().replace(/^.+?\s/,'')}));
+  document.querySelectorAll('[data-nav]').forEach(a=>a.addEventListener('click',()=>{const target=a.dataset.nav;document.querySelectorAll('[data-nav]').forEach(n=>n.classList.toggle('active',n.dataset.nav===target));const labels={overview:'Overview',alarms:'Alarms',exam:'Exam countdown',focus:'Focus mode'};$('pageLabel').textContent=labels[target]||'Overview'}));
   document.addEventListener('visibilitychange',()=>{if(!document.hidden){checkAlarms();renderExam()}});
   window.addEventListener('focus',()=>{checkAlarms();renderExam()});
   window.addEventListener('storage',e=>{if(e.key===STORAGE_KEY){state=loadState();renderAll()}});
