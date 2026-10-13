@@ -1,0 +1,94 @@
+name: Build CB Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "app.js"
+      - "index.html"
+      - "styles.css"
+      - "package.json"
+      - "capacitor.config.json"
+      - "native/**"
+      - ".github/workflows/android-apk.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Install JavaScript dependencies
+        run: npm install --no-audit --no-fund
+      - name: Prepare web assets
+        run: |
+          mkdir -p web
+          cp index.html app.js styles.css web/
+          if [ -f supabase-config.js ]; then cp supabase-config.js web/; fi
+      - name: Generate Android project
+        run: npx cap add android
+      - name: Add native alarm implementation
+        run: |
+          mkdir -p android/app/src/main/java/com/clearbefore/cb
+          cp native/android/*.kt android/app/src/main/java/com/clearbefore/cb/
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("android/app/src/main/java/com/clearbefore/cb/MainActivity.java")
+          if p.exists():
+              s=p.read_text()
+              s=s.replace("import com.getcapacitor.BridgeActivity;", "import com.getcapacitor.BridgeActivity;\nimport com.clearbefore.cb.CBAlarmPlugin;")
+              s=s.replace("public class MainActivity extends BridgeActivity {", "public class MainActivity extends BridgeActivity {\n    @Override\n    public void onCreate(android.os.Bundle savedInstanceState) {\n        registerPlugin(CBAlarmPlugin.class);\n        super.onCreate(savedInstanceState);\n    }")
+              p.write_text(s)
+          else:
+              p=Path("android/app/src/main/java/com/clearbefore/cb/MainActivity.kt")
+              s=p.read_text()
+              s=s.replace("import com.getcapacitor.BridgeActivity", "import com.getcapacitor.BridgeActivity\nimport com.clearbefore.cb.CBAlarmPlugin")
+              s=s.replace("class MainActivity : BridgeActivity()", "class MainActivity : BridgeActivity() {\n    override fun onCreate(savedInstanceState: android.os.Bundle?) {\n        registerPlugin(CBAlarmPlugin::class.java)\n        super.onCreate(savedInstanceState)\n    }\n}")
+              p.write_text(s)
+          PY
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("android/app/src/main/AndroidManifest.xml")
+          s=p.read_text()
+          for permission in [
+            'android.permission.WAKE_LOCK',
+            'android.permission.RECEIVE_BOOT_COMPLETED',
+            'android.permission.SCHEDULE_EXACT_ALARM',
+            'android.permission.USE_FULL_SCREEN_INTENT',
+            'android.permission.POST_NOTIFICATIONS',
+            'android.permission.FOREGROUND_SERVICE',
+            'android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK'
+          ]:
+            tag=f'<uses-permission android:name="{permission}" />'
+            if tag not in s: s=s.replace('<application',tag+'\n    <application',1)
+          components = '''
+              <receiver android:name="com.clearbefore.cb.CBAlarmReceiver" android:exported="false" />
+              <receiver android:name="com.clearbefore.cb.CBBootReceiver" android:enabled="true" android:exported="false">
+                  <intent-filter><action android:name="android.intent.action.BOOT_COMPLETED" /></intent-filter>
+              </receiver>
+              <service android:name="com.clearbefore.cb.CBAlarmService" android:exported="false" android:foregroundServiceType="mediaPlayback" />
+          '''
+          if 'com.clearbefore.cb.CBAlarmReceiver' not in s: s=s.replace('</application>',components+'\n    </application>')
+          p.write_text(s)
+          PY
+      - name: Sync Capacitor
+        run: npx cap sync android
+      - name: Build debug APK
+        working-directory: android
+        run: ./gradlew assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cb-exam-alarm-debug-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14
