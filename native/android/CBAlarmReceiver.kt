@@ -29,7 +29,7 @@ class CBAlarmReceiver : BroadcastReceiver() {
             for (i in 0 until alarms.length()) {
                 val a = alarms.optJSONObject(i) ?: continue
                 if (a.optString("id") != id) continue
-                if (a.optJSONArray("days")?.length() ?: 0 == 0) a.put("enabled", false)
+                if ((a.optJSONArray("days")?.length() ?: 0) == 0) a.put("enabled", false)
                 else CBAlarmScheduler.scheduleNext(context, a)
                 prefs.edit().putString(CBAlarmScheduler.ALARMS_KEY, alarms.toString()).apply()
                 val service = Intent(context, CBAlarmService::class.java).putExtra("label", a.optString("label", "CB Alarm")).putExtra("alarmId", id).putExtra("snooze", a.optInt("snooze", 5))
