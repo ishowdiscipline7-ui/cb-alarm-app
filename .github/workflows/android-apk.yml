@@ -36,6 +36,19 @@ jobs:
           if [ -f supabase-config.js ]; then cp supabase-config.js web/; fi
       - name: Generate Android project
         run: npx cap add android
+      - name: Enable Kotlin for native alarm code
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("android/app/build.gradle")
+          s = p.read_text()
+          marker = "plugins {"
+          if "org.jetbrains.kotlin.android" not in s:
+              if marker not in s:
+                  raise SystemExit("Could not find Android app plugins block")
+              s = s.replace(marker, marker + "\\n    id 'org.jetbrains.kotlin.android' version '1.9.24'", 1)
+              p.write_text(s)
+          PY
       - name: Add native alarm implementation
         run: |
           mkdir -p android/app/src/main/java/com/clearbefore/cb
