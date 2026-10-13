@@ -260,3 +260,43 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
  body{background:radial-gradient(ellipse at 90% 0,rgba(58,112,100,.13),transparent 36%),#080b0f}
  .stat-card,.panel{box-shadow:0 8px 22px rgba(0,0,0,.2)}
 }
+
+
+/* Monochrome black edition: remove green, teal, purple, and colored accents */
+:root{color-scheme:dark;--bg:#000;--panel:#0a0a0a;--panel2:#101010;--line:#242424;--text:#f5f5f5;--muted:#a0a0a0;--purple:#f2f2f2;--purple2:#d6d6d6;--blue:#dedede;--green:#d8d8d8;--orange:#c7c7c7;--radius:20px}
+html,body,body{background:#000!important;color:#f5f5f5}
+.sidebar,.topbar,.mobile-bottom-nav{background:#050505!important;border-color:#222!important}
+.brand-mark{background:#f2f2f2!important;color:#050505!important;box-shadow:none!important}
+.primary-button{background:#f2f2f2!important;color:#050505!important;box-shadow:none!important;border:1px solid #f2f2f2!important}
+.primary-button:hover{background:#d8d8d8!important}
+.secondary-button,.icon-button{background:#111!important;color:#eee!important;border-color:#333!important}
+.nav-item.active,.mobile-bottom-nav a.active{background:#171717!important;border-color:#333!important;color:#fff!important;box-shadow:inset 3px 0 #eee!important}
+.nav-item.active .nav-icon{color:#fff!important}
+.nav-count,.heading-count{background:#202020!important;color:#eee!important}
+.stat-card,.panel{background:#090909!important;border-color:#252525!important;box-shadow:none!important}
+.stat-card:hover{border-color:#444!important}
+.exam-panel{background:#080808!important;border-color:#292929!important}
+.eyebrow,.quick-exam-date label,.eyebrow-line,.text-button,.footer-link{color:#d0d0d0!important}
+.eyebrow-line{background:#e8e8e8!important}
+.countdown-pills span,.countdown-pills i{color:#aaa!important}
+.countdown-pills div{background:#050505!important;border-color:#292929!important}
+.orbit,.orbit-one,.orbit-two,.orbit-three{border-color:#444!important}
+.art-core{background:#101010!important;border-color:#444!important;box-shadow:none!important}
+.art-core span,.art-star{color:#ddd!important}
+.stat-icon,.calendar-icon,.empty-clock,.sound-note-icon,.alarm-clock-icon,.tip-icon,.streak-flame,.alert-symbol,.ring-wave{background:#181818!important;color:#eee!important}
+.stat-icon.blue,.stat-icon.green,.stat-icon.orange,.alarm-row:nth-child(3n + 2) .alarm-clock-icon,.alarm-row:nth-child(3n) .alarm-clock-icon{background:#181818!important;color:#eee!important}
+.toggle input:checked+span{background:#eee!important}
+.toggle input:checked+span:before{background:#080808!important}
+.focus-ring{background:conic-gradient(#eee 0deg,#444 0deg,#171717 360deg)!important}
+.focus-ring:before{background:#090909!important;border-color:#333!important}
+.focus-inner span,.week-day.today{color:#eee!important}
+.preset.active,.week-day.done span,.week-day.today span,.days-picker label input:checked+span{background:#202020!important;border-color:#666!important;color:#fff!important;box-shadow:none!important}
+.side-tip,.sound-note{background:#0b0b0b!important;border-color:#292929!important}
+.text-input{background:#050505!important;border-color:#333!important;color:#f5f5f5!important}
+.text-input:focus,select:focus,textarea:focus,.quick-exam-date input:focus{border-color:#aaa!important;box-shadow:0 0 0 3px #ffffff12!important}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline-color:#eee!important}
+.modal,.ring-card{background:#090909!important;border-color:#333!important}
+.modal::backdrop{background:#000e!important}
+.toast{background:#eee!important;color:#050505!important}
+::selection{background:#555!important;color:#fff!important}
+@media(max-width:620px){body{background:#000!important}.stat-card,.panel{box-shadow:none!important}}
