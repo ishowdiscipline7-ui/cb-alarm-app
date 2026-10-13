@@ -8,5 +8,5 @@
  */
 window.CB_SUPABASE_CONFIG = {
   url: "https://squrwnbwtmmnmtaxuoac.supabase.co",
-  anonKey: "YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY"
+  anonKey: "sb_publishable_A0SVl5UALTCoXot1otMehw_KmBYg_DG"
 };
