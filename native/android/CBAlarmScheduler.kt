@@ -11,6 +11,7 @@ import java.util.Calendar
 object CBAlarmScheduler {
     const val PREFS = "cb_native_alarms"
     const val ALARMS_KEY = "alarms"
+    const val CUSTOM_SOUND_PATH = "custom_sound_path"
 
     fun pending(context: Context, id: String): PendingIntent {
         val intent = Intent(context, CBAlarmReceiver::class.java).setAction("com.clearbefore.cb.FIRE").putExtra("alarmId", id)
