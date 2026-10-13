@@ -76,3 +76,14 @@ body{background:radial-gradient(ellipse at 72% -14%,#28234a 0,transparent 37%),r
  .mobile-bottom-nav{left:8px;right:8px;bottom:calc(7px + env(safe-area-inset-bottom))}
  .modal{max-height:88vh}
 }
+
+/* Account and cloud sync controls */
+.auth-trigger{white-space:nowrap;max-width:190px;overflow:hidden;text-overflow:ellipsis;padding:10px 13px;font-size:12px}
+.auth-modal{max-width:480px}
+.auth-modal .panel-description{margin:0 0 20px}
+.auth-error{min-height:20px;color:#ff9caa;font-size:12px;line-height:1.5;margin-top:10px}
+.auth-actions{display:grid;grid-template-columns:1fr 1fr}
+.auth-actions button{min-width:0}
+#storageStatus{display:inline-flex;align-items:center;gap:7px}
+@media(max-width:900px){.auth-trigger{padding:8px 10px;font-size:11px;max-width:125px}.top-actions{gap:8px}}
+@media(max-width:480px){.auth-trigger{max-width:100px}.top-actions .live-status{display:none}.auth-actions{grid-template-columns:1fr}.auth-modal{width:calc(100% - 24px)}}
