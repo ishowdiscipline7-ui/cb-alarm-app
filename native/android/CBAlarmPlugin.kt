@@ -22,8 +22,8 @@ class CBAlarmPlugin : Plugin() {
         val alarms = call.getArray("alarms") ?: JSArray()
         val json = alarms.toString()
         val prefs = context.getSharedPreferences(CBAlarmScheduler.PREFS, Context.MODE_PRIVATE)
-        prefs.edit().putString(CBAlarmScheduler.ALARMS_KEY, json).apply()
         CBAlarmScheduler.cancelAll(context)
+        prefs.edit().putString(CBAlarmScheduler.ALARMS_KEY, json).apply()
         try {
             val arr = JSONArray(json)
             for (i in 0 until arr.length()) {
