@@ -8,8 +8,6 @@
   <title>CB — Exam Alarm</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%237c6cff'/%3E%3Ctext x='50' y='65' font-size='43' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3ECB%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-config.js"></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -33,7 +31,7 @@
       <header class="topbar">
         <div class="mobile-brand"><span class="brand-mark">CB</span><strong>clear before</strong></div>
         <div class="breadcrumb">Workspace <span>/</span> <strong id="pageLabel">Overview</strong></div>
-        <div class="top-actions"><span class="live-status"><span></span> Your focus, your pace</span><button class="secondary-button auth-trigger" id="accountBtn">Sign in to sync</button><button class="icon-button" id="notificationBtn" title="Enable notifications" aria-label="Enable notifications">♧</button><button class="primary-button compact" id="quickAddBtn">＋ New alarm</button></div>
+        <div class="top-actions"><span class="live-status"><span></span> Your focus, your pace</span><button class="icon-button" id="notificationBtn" title="Enable notifications" aria-label="Enable notifications">♧</button><button class="primary-button compact" id="quickAddBtn">＋ New alarm</button></div>
       </header>
 
       <section class="welcome-row">
@@ -72,17 +70,6 @@
   </div>
 
 
-  <dialog id="authDialog" class="modal auth-modal">
-    <form id="authForm" method="dialog">
-      <div class="modal-heading"><div><div class="eyebrow">YOUR STUDY SPACE</div><h2 id="authTitle">Sign in to CB</h2></div><button type="button" class="close-button" data-close="authDialog" aria-label="Close">×</button></div>
-      <p class="panel-description" id="authDescription">Securely sync your alarms and exam plan across devices.</p>
-      <label class="field-label" for="authEmail">Email address</label><input class="text-input" id="authEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
-      <label class="field-label" for="authPassword">Password</label><input class="text-input" id="authPassword" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required>
-      <div class="auth-error" id="authError" role="status" aria-live="polite"></div>
-      <div class="modal-actions auth-actions"><button type="button" class="secondary-button" id="signUpBtn">Create account</button><button type="submit" class="primary-button" id="signInBtn">Sign in →</button></div>
-      <p class="field-help">Your account is managed by Supabase. Use a unique password and never share it.</p>
-    </form>
-  </dialog>
   <dialog id="alarmDialog" class="modal">
     <form id="alarmForm" method="dialog">
       <div class="modal-heading"><div><div class="eyebrow">MAKE IT HAPPEN</div><h2 id="alarmDialogTitle">Create an alarm</h2></div><button type="button" class="close-button" data-close="alarmDialog" aria-label="Close">×</button></div>
