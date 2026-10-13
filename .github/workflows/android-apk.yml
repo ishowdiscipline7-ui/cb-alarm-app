@@ -40,14 +40,22 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          p = Path("android/app/build.gradle")
-          s = p.read_text()
-          marker = "plugins {"
-          if "org.jetbrains.kotlin.android" not in s:
-              if marker not in s:
-                  raise SystemExit("Could not find Android app plugins block")
-              s = s.replace(marker, marker + "\n    id 'org.jetbrains.kotlin.android' version '1.9.24'", 1)
-              p.write_text(s)
+          app_gradle = Path("android/app/build.gradle")
+          app_text = app_gradle.read_text()
+          if "org.jetbrains.kotlin.android" not in app_text and "kotlin-android" not in app_text:
+              if "plugins {" in app_text:
+                  app_text = app_text.replace("plugins {", "plugins {\\n    id 'org.jetbrains.kotlin.android' version '1.9.24'", 1)
+              else:
+                  app_text += "\\napply plugin: 'org.jetbrains.kotlin.android'\\n"
+                  root_gradle = Path("android/build.gradle")
+                  root_text = root_gradle.read_text()
+                  dependency = "classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24'"
+                  if dependency not in root_text:
+                      if "dependencies {" not in root_text:
+                          raise SystemExit("Could not find root Gradle dependencies block")
+                      root_text = root_text.replace("dependencies {", "dependencies {\\n        " + dependency, 1)
+                      root_gradle.write_text(root_text)
+              app_gradle.write_text(app_text)
           PY
       - name: Add native alarm implementation
         run: |
