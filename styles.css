@@ -449,3 +449,31 @@ button,input,select,textarea{font-family:inherit}
  #view-alarms .panel,#view-exam .panel,#view-schedule .panel,#view-soundLibrary .panel,#view-settings .panel{padding:15px}
 }
 @media(prefers-reduced-motion:reduce){.app-view.active{animation:none}}
+
+
+/* Put the wake-up streak above the dashboard metrics so it's visible immediately. */
+.dashboard-streak-panel{margin:0 0 18px!important;padding:18px 22px!important;display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,310px);grid-template-areas:"heading week" "copy week" "button week" "note week";column-gap:28px;row-gap:8px;align-items:center;border-color:#363636!important;background:linear-gradient(110deg,#111 0%,#080808 68%,#141414 100%)!important}
+.dashboard-streak-panel .panel-heading{grid-area:heading;justify-content:flex-start;gap:12px}
+.dashboard-streak-panel .panel-heading h2{font-size:calc(20px * var(--cb-font-scale,1))!important;margin-top:4px}
+.dashboard-streak-panel .streak-flame{background:#1b1b1b;color:#f2f2f2;border:1px solid #383838;flex:0 0 34px}
+.dashboard-streak-panel .panel-description{grid-area:copy;margin:0!important;font-size:calc(12px * var(--cb-font-scale,1));max-width:480px}
+.dashboard-streak-panel .week-strip{grid-area:week;margin:0;gap:7px}
+.dashboard-streak-panel .week-day{font-size:calc(10px * var(--cb-font-scale,1))}
+.dashboard-streak-panel .week-day span{width:34px;height:34px;border-radius:50%;background:#171717;border-color:#333;color:#f5f5f5}
+.dashboard-streak-panel .week-day.done span{background:#eee;color:#050505;border-color:#eee}
+.dashboard-streak-panel .week-day.today span{border:2px solid #fff;color:#fff}
+.dashboard-streak-panel .week-day.done.today span{color:#000}
+.dashboard-streak-panel #markWakeBtn{grid-area:button;justify-self:start;width:auto;min-width:190px;margin-top:3px;padding:10px 15px}
+.dashboard-streak-panel .streak-note{grid-area:note;margin:0;text-align:left;font-size:calc(11px * var(--cb-font-scale,1));color:#aaa}
+@media(max-width:900px){
+ .dashboard-streak-panel{grid-template-columns:1fr;grid-template-areas:"heading" "copy" "week" "button" "note";row-gap:12px;padding:16px!important}
+ .dashboard-streak-panel .week-strip{max-width:430px;width:100%}
+ .dashboard-streak-panel #markWakeBtn{width:100%;justify-self:stretch}
+}
+@media(max-width:620px){
+ .dashboard-streak-panel{margin-bottom:14px!important;padding:15px!important;border-radius:17px!important}
+ .dashboard-streak-panel .panel-heading h2{font-size:calc(18px * var(--cb-font-scale,1))!important}
+ .dashboard-streak-panel .week-strip{gap:3px}
+ .dashboard-streak-panel .week-day span{width:29px;height:29px;margin-top:5px}
+ .dashboard-streak-panel .week-day{font-size:calc(9px * var(--cb-font-scale,1))}
+}
