@@ -42,7 +42,7 @@
         <div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR PERSONAL STUDY SPACE</div><h1 id="greeting">Today</h1><p class="subtitle">A little progress every day adds up to something big.</p></div>
         <div class="date-chip"><span class="calendar-icon">▦</span><div><strong id="todayDate">Today</strong><small id="todayDay">Your day, planned</small></div></div>
       </section>
-        <article class="panel streak-panel dashboard-streak-panel"><div class="panel-heading"><div><div class="eyebrow">STREAK</div><h2>Streak</h2></div><span class="streak-flame">✦</span></div><p class="panel-description">Build your streak one morning at a time. Confirm today when you are up and ready.</p><div class="week-strip" id="weekStrip"></div><button class="secondary-button full-width" id="markWakeBtn">✓ Done</button><div class="streak-note" id="streakNote">Your next streak starts with one check-in.</div></article>
+        <article class="panel streak-panel dashboard-streak-panel" id="streak"><div class="panel-heading"><div><div class="eyebrow">STREAK</div><h2>Streak</h2></div><span class="streak-flame">✦</span></div><p class="panel-description">Build your streak one morning at a time. Confirm today when you are up and ready.</p><div class="week-strip" id="weekStrip"></div><button class="secondary-button full-width" id="markWakeBtn">✓ Done</button><div class="streak-note" id="streakNote">Your next streak starts with one check-in.</div></article>
               <section class="stats-grid" aria-label="Your stats">
         <article class="stat-card"><div class="stat-top"><span class="stat-label">NEXT ALARM</span><span class="stat-icon purple">◷</span></div><div class="stat-value" id="nextAlarmValue">--:--</div><div class="stat-foot" id="nextAlarmFoot">Add an alarm to get started</div></article>
         <article class="stat-card"><div class="stat-top"><span class="stat-label">EXAM IN</span><span class="stat-icon blue">▤</span></div><div class="stat-value" id="examDaysValue">— <small>days</small></div><div class="stat-foot" id="examNameFoot">Set your next big date</div></article>
@@ -163,6 +163,7 @@
   <nav class="mobile-bottom-nav" aria-label="Quick navigation">
     <a href="#overview" class="active" data-nav="overview"><span>⌂</span>Home</a>
     <a href="#alarms" data-nav="alarms"><span>◷</span>Alarms</a>
+    <a href="#streak" data-nav="streak"><span>✦</span>Streak</a>
     <a href="#exam" data-nav="exam"><span>▤</span>Exams</a>
     <a href="#schedule" data-nav="schedule"><span>▦</span>Plan</a>
     <a href="#focus" data-nav="focus"><span>◎</span>Focus</a>
