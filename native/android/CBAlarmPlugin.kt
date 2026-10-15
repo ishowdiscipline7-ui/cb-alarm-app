@@ -13,11 +13,14 @@ import com.getcapacitor.JSObject
 import com.getcapacitor.Plugin
 import com.getcapacitor.PluginCall
 import com.getcapacitor.PluginMethod
+import com.getcapacitor.PermissionState
 import com.getcapacitor.annotation.CapacitorPlugin
+import com.getcapacitor.annotation.Permission
+import com.getcapacitor.annotation.PermissionCallback
 import org.json.JSONArray
 import org.json.JSONObject
 
-@CapacitorPlugin(name = "CBAlarm")
+@CapacitorPlugin(name = "CBAlarm", permissions = [Permission(alias = "notifications", strings = [Manifest.permission.POST_NOTIFICATIONS])])
 class CBAlarmPlugin : Plugin() {
     @PluginMethod
     fun syncAlarms(call: PluginCall) {
@@ -59,6 +62,19 @@ class CBAlarmPlugin : Plugin() {
 
     @PluginMethod
     fun requestAlarmPermissions(call: PluginCall) {
+        if (Build.VERSION.SDK_INT >= 33 && getPermissionState("notifications") != PermissionState.GRANTED) {
+            requestPermissionForAlias("notifications", call, "notificationPermissionsCallback")
+            return
+        }
+        continueExactAlarmPermission(call)
+    }
+
+    @PermissionCallback
+    private fun notificationPermissionsCallback(call: PluginCall) {
+        continueExactAlarmPermission(call)
+    }
+
+    private fun continueExactAlarmPermission(call: PluginCall) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val manager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             if (!manager.canScheduleExactAlarms()) {
@@ -66,14 +82,13 @@ class CBAlarmPlugin : Plugin() {
                     .setData(Uri.parse("package:" + context.packageName))
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 activity.startActivity(intent)
-                call.resolve(JSObject().put("exactAlarmPermission", false).put("openedSettings", true))
+                call.resolve(JSObject().put("exactAlarmPermission", false).put("openedSettings", true)
+                    .put("notificationsGranted", Build.VERSION.SDK_INT < 33 || getPermissionState("notifications") == PermissionState.GRANTED))
                 return
             }
         }
-        if (Build.VERSION.SDK_INT >= 33) {
-            activity.requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 743)
-        }
-        call.resolve(JSObject().put("exactAlarmPermission", true))
+        call.resolve(JSObject().put("exactAlarmPermission", true)
+            .put("notificationsGranted", Build.VERSION.SDK_INT < 33 || getPermissionState("notifications") == PermissionState.GRANTED))
     }
 
     @PluginMethod
