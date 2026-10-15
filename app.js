@@ -164,6 +164,8 @@
     }
     activateView(a.dataset.nav);
   }));
+  /* Delegate shortcut clicks at document level so nested icons/text and late-rendered cards work reliably. */
+  document.addEventListener('click',e=>{const card=e.target&&e.target.closest?e.target.closest('[data-go-view]'):null;if(!card)return;const target=card.getAttribute('data-go-view');if(!Object.prototype.hasOwnProperty.call(viewLabels,target))return;e.preventDefault();e.stopPropagation();activateView(target);},true);
   document.querySelectorAll('[data-go-view]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();const target=b.dataset.goView;if(Object.prototype.hasOwnProperty.call(viewLabels,target))activateView(target);else toast('This section is not available yet.')}));
   $('morePermissionsBtn').addEventListener('click',requestAlarmPermissions);
   $('moreReliabilityBtn').addEventListener('click',()=>openDialog('infoDialog'));
