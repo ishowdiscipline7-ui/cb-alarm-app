@@ -42,10 +42,11 @@
         <div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR PERSONAL STUDY SPACE</div><h1 id="greeting">Make today <span>count.</span></h1><p class="subtitle">A little progress every day adds up to something big.</p></div>
         <div class="date-chip"><span class="calendar-icon">▦</span><div><strong id="todayDate">Today</strong><small id="todayDay">Your day, planned</small></div></div>
       </section>
+        <article class="panel streak-panel dashboard-streak-panel"><div class="panel-heading"><div><div class="eyebrow">YOUR MORNING WINS</div><h2>Wake-up streak</h2></div><span class="streak-flame">✦</span></div><p class="panel-description">Build your streak one morning at a time. Confirm today when you are up and ready.</p><div class="week-strip" id="weekStrip"></div><button class="secondary-button full-width" id="markWakeBtn">✓ Mark today complete</button><div class="streak-note" id="streakNote">Your next streak starts with one check-in.</div></article>
               <section class="stats-grid" aria-label="Your stats">
         <article class="stat-card"><div class="stat-top"><span class="stat-label">NEXT ALARM</span><span class="stat-icon purple">◷</span></div><div class="stat-value" id="nextAlarmValue">--:--</div><div class="stat-foot" id="nextAlarmFoot">Add an alarm to get started</div></article>
         <article class="stat-card"><div class="stat-top"><span class="stat-label">EXAM IN</span><span class="stat-icon blue">▤</span></div><div class="stat-value" id="examDaysValue">— <small>days</small></div><div class="stat-foot" id="examNameFoot">Set your next big date</div></article>
-        <article class="stat-card"><div class="stat-top"><span class="stat-label">WAKE-UP STREAK</span><span class="stat-icon orange">✦</span></div><div class="stat-value"><span id="streakValue">0</span> <small>days</small></div><div class="stat-foot">One day at a time</div></article>
+        <article class="stat-card"><div class="stat-top"><span class="stat-label">WAKE-UP STREAK</span><span class="stat-icon orange">✦</span></div><div class="stat-value"><span id="streakValueMini">0</span> <small>days</small></div><div class="stat-foot">One day at a time</div></article>
         <article class="stat-card"><div class="stat-top"><span class="stat-label">ALARMS ACTIVE</span><span class="stat-icon green">✓</span></div><div class="stat-value" id="activeAlarmValue">0</div><div class="stat-foot">Ready when you are</div></article>
       </section>
         <section class="dashboard-shortcuts" aria-label="Quick access">
@@ -83,10 +84,10 @@
       </section>
 
       <section class="app-view" id="view-focus" data-view="focus" aria-labelledby="focusScreenTitle">
-        <div class="screen-heading"><div><div class="eyebrow">STUDY ROUTINE</div><h1 id="focusScreenTitle">Focus mode</h1><p class="subtitle">Protect your attention, then track your consistency.</p></div></div>
+        <div class="screen-heading"><div><div class="eyebrow">STUDY ROUTINE</div><h1 id="focusScreenTitle">Focus mode</h1><p class="subtitle">Give one task your full attention and build momentum.</p></div></div>
         <div class="focus-screen-grid">
                     <article class="panel routine-panel" id="focus"><div class="panel-heading"><div><div class="eyebrow">STAY CONSISTENT</div><h2>Focus session</h2></div><span class="soft-badge">Deep work</span></div><p class="panel-description">Give one task your full attention. Start small and build momentum.</p><div class="focus-ring" id="focusRing"><div class="focus-inner"><span id="focusStatus">READY</span><strong id="focusTime">25:00</strong><small>MINUTES</small></div></div><div class="focus-controls"><button class="primary-button full-width" id="focusStartBtn">Start focus <span>▶</span></button><button class="secondary-button full-width" id="focusResetBtn">Reset timer</button></div><div class="focus-presets"><button class="preset active" data-minutes="25">25 min</button><button class="preset" data-minutes="45">45 min</button><button class="preset" data-minutes="60">60 min</button></div></article>
-                    <article class="panel streak-panel"><div class="panel-heading"><div><div class="eyebrow">YOUR MOMENTUM</div><h2>Consistency beats intensity</h2></div><span class="streak-flame">✦</span></div><p class="panel-description">Celebrate the days you show up. Tap below when you've completed your morning routine.</p><div class="week-strip" id="weekStrip"></div><button class="secondary-button full-width" id="markWakeBtn">✓ Mark today complete</button><div class="streak-note" id="streakNote">Your next streak starts with one check-in.</div></article>
+                    
         </div>
       </section>
 
