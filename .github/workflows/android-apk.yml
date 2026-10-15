@@ -99,6 +99,7 @@ jobs:
                   <intent-filter><action android:name="android.intent.action.BOOT_COMPLETED" /></intent-filter>
               </receiver>
               <service android:name="com.clearbefore.cb.CBAlarmService" android:exported="false" android:foregroundServiceType="mediaPlayback" />
+              <activity android:name="com.clearbefore.cb.CBAlarmActivity" android:exported="false" android:excludeFromRecents="true" android:launchMode="singleTop" android:showWhenLocked="true" android:turnScreenOn="true" />
           '''
           if 'com.clearbefore.cb.CBAlarmReceiver' not in s: s=s.replace('</application>',components+'\n    </application>')
           p.write_text(s)
