@@ -507,3 +507,41 @@ button,input,select,textarea{font-family:inherit}
  .dashboard-streak-panel{padding:14px!important}
  .panel-heading{margin-bottom:12px!important}
 }
+
+
+/* Ultra-minimal pass: show core values and controls, hide explanatory details everywhere. */
+.app-view p,
+.app-view .stat-foot,
+.app-view .streak-note,
+.app-view .shortcut-copy small,
+.app-view .panel-description,
+.app-view .subtitle,
+.app-view .field-help,
+.app-view .empty-state p,
+.app-view .inline-empty,
+.app-view .setting-control small,
+.app-view .settings-permissions small,
+.app-view .sound-card small,
+.app-view .custom-sound-row small,
+.app-view .quick-exam-date small,
+.app-view .countdown-pills span,
+.app-view .soft-badge,
+.app-view .date-chip small,
+.app-view .footer,
+.app-view .focus-inner small {display:none!important}
+.app-view .stat-label{font-size:10px!important;letter-spacing:.8px!important}
+.app-view .panel-heading h2{margin:0!important}
+.app-view .panel-heading{margin-bottom:12px!important}
+.app-view .welcome-row .subtitle,.app-view .welcome-row .eyebrow{display:none!important}
+.dashboard-streak-panel{grid-template-areas:"heading week" "button week"!important;row-gap:10px!important}
+.dashboard-streak-panel .panel-heading{margin:0!important}
+.dashboard-streak-panel #markWakeBtn{min-width:100px!important;width:auto!important;padding:9px 16px!important}
+.shortcut-heading .soft-badge{display:none!important}
+@media(max-width:900px){
+ .dashboard-streak-panel{grid-template-areas:"heading" "week" "button"!important}
+ .dashboard-streak-panel #markWakeBtn{width:100%!important}
+}
+@media(max-width:620px){
+ .app-view .stat-label{font-size:9px!important}
+ .dashboard-streak-panel{gap:10px!important}
+}
