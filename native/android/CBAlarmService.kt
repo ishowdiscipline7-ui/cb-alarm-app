@@ -50,20 +50,36 @@ class CBAlarmService : Service() {
             this, id.hashCode() + 12, snoozeIntent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
+        val alarmScreenIntent = Intent(this, CBAlarmActivity::class.java)
+            .putExtra("label", label)
+            .putExtra("alarmId", id)
+            .putExtra("snooze", snoozeMinutes)
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        val fullScreenPi = PendingIntent.getActivity(
+            this, id.hashCode() + 13, alarmScreenIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
         val notification = if (Build.VERSION.SDK_INT >= 26) Notification.Builder(this, channelId) else Notification.Builder(this)
         notification.setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
             .setContentTitle(label)
-            .setContentText("CB Exam Alarm is ringing")
+            .setContentText("Tap to stop or snooze your CB alarm")
             .setCategory(Notification.CATEGORY_ALARM)
             .setVisibility(Notification.VISIBILITY_PUBLIC)
+            .setPriority(Notification.PRIORITY_MAX)
+            .setContentIntent(fullScreenPi)
+            .setFullScreenIntent(fullScreenPi, true)
             .setOngoing(true)
+            .setAutoCancel(false)
             .addAction(android.R.drawable.ic_menu_close_clear_cancel, "Dismiss", stopPi)
         if (snoozeMinutes > 0) {
             notification.addAction(android.R.drawable.ic_lock_idle_alarm, "Snooze ${snoozeMinutes} min", snoozePi)
         }
         startForeground(2001, notification.build())
 
-        if (player == null) startRinging(sound)
+        try { player?.stop() } catch (_: Exception) { }
+        try { player?.release() } catch (_: Exception) { }
+        player = null
+        startRinging(sound)
         return START_STICKY
     }
 
