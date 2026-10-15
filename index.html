@@ -37,45 +37,62 @@
         <div class="top-actions"><span class="live-status"><span></span> Your focus, your pace</span><button class="icon-button" id="notificationBtn" title="Enable notifications" aria-label="Enable notifications">♧</button><button class="primary-button compact" id="quickAddBtn">＋ New alarm</button></div>
       </header>
 
-      <section class="welcome-row">
+      <section class="app-view active" id="view-overview" data-view="overview" aria-labelledby="greeting">
+              <section class="welcome-row">
         <div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR PERSONAL STUDY SPACE</div><h1 id="greeting">Make today <span>count.</span></h1><p class="subtitle">A little progress every day adds up to something big.</p></div>
         <div class="date-chip"><span class="calendar-icon">▦</span><div><strong id="todayDate">Today</strong><small id="todayDay">Your day, planned</small></div></div>
       </section>
-
-      <section class="stats-grid" aria-label="Your stats">
+              <section class="stats-grid" aria-label="Your stats">
         <article class="stat-card"><div class="stat-top"><span class="stat-label">NEXT ALARM</span><span class="stat-icon purple">◷</span></div><div class="stat-value" id="nextAlarmValue">--:--</div><div class="stat-foot" id="nextAlarmFoot">Add an alarm to get started</div></article>
         <article class="stat-card"><div class="stat-top"><span class="stat-label">EXAM IN</span><span class="stat-icon blue">▤</span></div><div class="stat-value" id="examDaysValue">— <small>days</small></div><div class="stat-foot" id="examNameFoot">Set your next big date</div></article>
         <article class="stat-card"><div class="stat-top"><span class="stat-label">WAKE-UP STREAK</span><span class="stat-icon orange">✦</span></div><div class="stat-value"><span id="streakValue">0</span> <small>days</small></div><div class="stat-foot">One day at a time</div></article>
         <article class="stat-card"><div class="stat-top"><span class="stat-label">ALARMS ACTIVE</span><span class="stat-icon green">✓</span></div><div class="stat-value" id="activeAlarmValue">0</div><div class="stat-foot">Ready when you are</div></article>
       </section>
+        <section class="dashboard-shortcuts" aria-label="Quick access">
+          <div class="shortcut-heading"><div><div class="eyebrow">YOUR WORKSPACE</div><h2>Jump back in</h2></div><span class="soft-badge">Quick access</span></div>
+          <div class="shortcut-grid">
+            <button type="button" class="shortcut-card" data-go-view="alarms"><span class="shortcut-icon">◷</span><span class="shortcut-copy"><strong>Alarms</strong><small>Manage times, repeats and snooze</small></span><span class="shortcut-arrow">→</span></button>
+            <button type="button" class="shortcut-card" data-go-view="exam"><span class="shortcut-icon">▤</span><span class="shortcut-copy"><strong>Exams & countdowns</strong><small>Keep every exam date in view</small></span><span class="shortcut-arrow">→</span></button>
+            <button type="button" class="shortcut-card" data-go-view="schedule"><span class="shortcut-icon">▦</span><span class="shortcut-copy"><strong>Schedule</strong><small>Deadlines and important dates</small></span><span class="shortcut-arrow">→</span></button>
+            <button type="button" class="shortcut-card" data-go-view="focus"><span class="shortcut-icon">◎</span><span class="shortcut-copy"><strong>Focus session</strong><small>Start your next study sprint</small></span><span class="shortcut-arrow">→</span></button>
+          </div>
+        </section>
+      </section>
 
-      <section class="content-grid">
-        <div class="left-column">
-          <article class="panel exam-panel" id="exam">
-            <div class="panel-heading"><div><div class="eyebrow">THE BIG DAYS</div><h2>Exams & countdown</h2></div><div class="panel-heading-actions"><button class="text-button" id="editExamBtn">Edit next</button><button class="text-button" id="addExamBtn">＋ Add exam</button></div></div>
+      <section class="app-view" id="view-alarms" data-view="alarms" aria-labelledby="alarmsTitle">
+                  <article class="panel alarms-panel" id="alarms">
+            <div class="panel-heading"><div><div class="eyebrow">BE READY</div><h2 id="alarmsTitle">Your alarms <span class="heading-count" id="alarmHeadingCount">0</span></h2></div><button class="text-button" id="addAlarmLink">＋ Add alarm</button></div>
+            <div class="alarm-list" id="alarmList"><div class="empty-state"><div class="empty-clock">◷</div><strong>No alarms yet</strong><p>Create an alarm for your study routine or exam morning.</p><button class="secondary-button" id="emptyAddBtn">Create your first alarm</button></div></div>
+          </article>
+      </section>
+
+      <section class="app-view" id="view-exam" data-view="exam" aria-labelledby="examScreenTitle">
+                  <article class="panel exam-panel" id="exam">
+            <div class="panel-heading"><div><div class="eyebrow">THE BIG DAYS</div><h2 id="examScreenTitle">Exams & countdown</h2></div><div class="panel-heading-actions"><button class="text-button" id="editExamBtn">Edit next</button><button class="text-button" id="addExamBtn">＋ Add exam</button></div></div>
             <div class="exam-content"><div class="exam-copy"><div class="exam-name" id="examName">Your next exam</div><p id="examDescription">Every focused session brings you closer.</p><div class="countdown-pills"><div><strong id="countDays">—</strong><span>DAYS</span></div><i>:</i><div><strong id="countHours">—</strong><span>HOURS</span></div><i>:</i><div><strong id="countMinutes">—</strong><span>MINUTES</span></div></div><div class="quick-exam-date"><label for="examQuickDate">Exam date</label><input class="text-input" id="examQuickDate" type="date" aria-describedby="quickExamHelp"><small id="quickExamHelp">Choose a date — your countdown saves automatically.</small></div></div><div class="progress-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><div class="art-core"><span>✦</span><strong id="artDays">?</strong><small>DAYS LEFT</small></div><div class="art-star star-a">✦</div><div class="art-star star-b">✧</div><div class="art-star star-c">·</div></div></div>
             <div class="exam-list" id="examList"></div>
           </article>
-
-          <article class="panel alarms-panel" id="alarms">
-            <div class="panel-heading"><div><div class="eyebrow">BE READY</div><h2>Your alarms <span class="heading-count" id="alarmHeadingCount">0</span></h2></div><button class="text-button" id="addAlarmLink">＋ Add alarm</button></div>
-            <div class="alarm-list" id="alarmList"><div class="empty-state"><div class="empty-clock">◷</div><strong>No alarms yet</strong><p>Create an alarm for your study routine or exam morning.</p><button class="secondary-button" id="emptyAddBtn">Create your first alarm</button></div></div>
-          </article>
-        </div>
-
-        <div class="right-column">
-          <article class="panel routine-panel" id="focus"><div class="panel-heading"><div><div class="eyebrow">STAY CONSISTENT</div><h2>Focus session</h2></div><span class="soft-badge">Deep work</span></div><p class="panel-description">Give one task your full attention. Start small and build momentum.</p><div class="focus-ring" id="focusRing"><div class="focus-inner"><span id="focusStatus">READY</span><strong id="focusTime">25:00</strong><small>MINUTES</small></div></div><div class="focus-controls"><button class="primary-button full-width" id="focusStartBtn">Start focus <span>▶</span></button><button class="secondary-button full-width" id="focusResetBtn">Reset timer</button></div><div class="focus-presets"><button class="preset active" data-minutes="25">25 min</button><button class="preset" data-minutes="45">45 min</button><button class="preset" data-minutes="60">60 min</button></div></article>
-          <article class="panel streak-panel"><div class="panel-heading"><div><div class="eyebrow">YOUR MOMENTUM</div><h2>Consistency beats intensity</h2></div><span class="streak-flame">✦</span></div><p class="panel-description">Celebrate the days you show up. Tap below when you've completed your morning routine.</p><div class="week-strip" id="weekStrip"></div><button class="secondary-button full-width" id="markWakeBtn">✓ Mark today complete</button><div class="streak-note" id="streakNote">Your next streak starts with one check-in.</div></article>
-          <article class="sound-note"><span class="sound-note-icon">♫</span><div><strong>Make it yours</strong><p>Choose a tone or upload your own sound in alarm settings.</p></div></article>
-        </div>
       </section>
-      <section class="panel schedule-panel" id="schedule">
-        <div class="panel-heading"><div><div class="eyebrow">YOUR PLAN</div><h2>Schedule & important dates</h2></div><button class="text-button" id="addEventBtn">＋ Add date</button></div>
+
+      <section class="app-view" id="view-schedule" data-view="schedule" aria-labelledby="scheduleScreenTitle">
+              <section class="panel schedule-panel" id="schedule">
+        <div class="panel-heading"><div><div class="eyebrow">YOUR PLAN</div><h2 id="scheduleScreenTitle">Schedule & important dates</h2></div><button class="text-button" id="addEventBtn">＋ Add date</button></div>
         <p class="panel-description">Keep exams, deadlines, and personal milestones in one simple timeline.</p>
         <div class="schedule-list" id="eventList"><div class="inline-empty">Your upcoming dates will appear here.</div></div>
       </section>
-      <section class="panel sound-library-panel" id="soundLibrary">
-        <div class="panel-heading"><div><div class="eyebrow">MAKE IT YOURS</div><h2>Sound library</h2></div><span class="soft-badge" id="soundLibraryStatus">Built-in sounds</span></div>
+      </section>
+
+      <section class="app-view" id="view-focus" data-view="focus" aria-labelledby="focusScreenTitle">
+        <div class="screen-heading"><div><div class="eyebrow">STUDY ROUTINE</div><h1 id="focusScreenTitle">Focus mode</h1><p class="subtitle">Protect your attention, then track your consistency.</p></div></div>
+        <div class="focus-screen-grid">
+                    <article class="panel routine-panel" id="focus"><div class="panel-heading"><div><div class="eyebrow">STAY CONSISTENT</div><h2>Focus session</h2></div><span class="soft-badge">Deep work</span></div><p class="panel-description">Give one task your full attention. Start small and build momentum.</p><div class="focus-ring" id="focusRing"><div class="focus-inner"><span id="focusStatus">READY</span><strong id="focusTime">25:00</strong><small>MINUTES</small></div></div><div class="focus-controls"><button class="primary-button full-width" id="focusStartBtn">Start focus <span>▶</span></button><button class="secondary-button full-width" id="focusResetBtn">Reset timer</button></div><div class="focus-presets"><button class="preset active" data-minutes="25">25 min</button><button class="preset" data-minutes="45">45 min</button><button class="preset" data-minutes="60">60 min</button></div></article>
+                    <article class="panel streak-panel"><div class="panel-heading"><div><div class="eyebrow">YOUR MOMENTUM</div><h2>Consistency beats intensity</h2></div><span class="streak-flame">✦</span></div><p class="panel-description">Celebrate the days you show up. Tap below when you've completed your morning routine.</p><div class="week-strip" id="weekStrip"></div><button class="secondary-button full-width" id="markWakeBtn">✓ Mark today complete</button><div class="streak-note" id="streakNote">Your next streak starts with one check-in.</div></article>
+        </div>
+      </section>
+
+      <section class="app-view" id="view-soundLibrary" data-view="soundLibrary" aria-labelledby="soundScreenTitle">
+              <section class="panel sound-library-panel" id="soundLibrary">
+        <div class="panel-heading"><div><div class="eyebrow">MAKE IT YOURS</div><h2 id="soundScreenTitle">Sound library</h2></div><span class="soft-badge" id="soundLibraryStatus">Built-in sounds</span></div>
         <p class="panel-description">Preview alarm tones and choose the default sound for new alarms.</p>
         <div class="sound-grid">
           <article class="sound-card"><span class="sound-card-icon">♫</span><strong>Gentle chime</strong><small>Soft wake-up tone</small><div><button class="mini-action" data-preview-sound="gentle">Preview</button><button class="mini-action" data-choose-sound="gentle">Use sound</button></div></article>
@@ -84,8 +101,11 @@
         </div>
         <div class="custom-sound-row"><div><strong>Custom sound</strong><small id="libraryUploadStatus">Choose an audio file from your phone.</small></div><input id="librarySoundUpload" type="file" accept="audio/*" class="text-input file-input" aria-label="Upload custom alarm sound"></div>
       </section>
-      <section class="panel settings-panel" id="settings">
-        <div class="panel-heading"><div><div class="eyebrow">YOUR PREFERENCES</div><h2>Settings</h2></div><span class="soft-badge">Saved on this device</span></div>
+      </section>
+
+      <section class="app-view" id="view-settings" data-view="settings" aria-labelledby="settingsScreenTitle">
+              <section class="panel settings-panel" id="settings">
+        <div class="panel-heading"><div><div class="eyebrow">YOUR PREFERENCES</div><h2 id="settingsScreenTitle">Settings</h2></div><span class="soft-badge">Saved on this device</span></div>
         <div class="settings-grid">
           <label class="setting-control"><span>Font family</span><small>Choose the text style you prefer.</small><select class="text-input" id="fontFamilySetting"><option value="system">System default</option><option value="inter">Inter</option><option value="arial">Arial</option><option value="georgia">Georgia</option><option value="mono">Monospace</option></select></label>
           <label class="setting-control"><span>Font size <output id="fontSizeValue">100%</output></span><small>Adjust text from smaller to larger.</small><input id="fontSizeSetting" type="range" min="85" max="130" step="5" value="100"></label>
@@ -93,6 +113,17 @@
           <label class="setting-control"><span>Default alarm sound</span><small>Preselected on new alarms.</small><select class="text-input" id="defaultSoundSetting"><option value="gentle">Gentle chime</option><option value="classic">Classic alarm</option><option value="pulse">Focus pulse</option><option value="uploaded">Custom sound</option></select></label>
         </div>
         <div class="settings-permissions"><div><strong>Alarm permissions</strong><small id="permissionHelp">Allow notifications and exact alarms so Android can alert you on time.</small></div><button class="secondary-button" id="settingPermissionBtn">Check permissions</button></div>
+      </section>
+      </section>
+
+      <section class="app-view" id="view-more" data-view="more" aria-labelledby="moreScreenTitle">
+        <div class="screen-heading"><div><div class="eyebrow">MORE TOOLS</div><h1 id="moreScreenTitle">More</h1><p class="subtitle">Personalise CB or choose the sound for your alarms.</p></div></div>
+        <div class="more-grid">
+          <button type="button" class="shortcut-card" data-go-view="soundLibrary"><span class="shortcut-icon">♫</span><span class="shortcut-copy"><strong>Sound library</strong><small>Preview and pick alarm tones</small></span><span class="shortcut-arrow">→</span></button>
+          <button type="button" class="shortcut-card" data-go-view="settings"><span class="shortcut-icon">⚙</span><span class="shortcut-copy"><strong>Settings</strong><small>Font size, typeface and defaults</small></span><span class="shortcut-arrow">→</span></button>
+          <button type="button" class="shortcut-card" id="morePermissionsBtn"><span class="shortcut-icon">♧</span><span class="shortcut-copy"><strong>Alarm permissions</strong><small>Check Android notification settings</small></span><span class="shortcut-arrow">→</span></button>
+          <button type="button" class="shortcut-card" id="moreReliabilityBtn"><span class="shortcut-icon">ⓘ</span><span class="shortcut-copy"><strong>Reliability & privacy</strong><small>How CB alarms work on your device</small></span><span class="shortcut-arrow">→</span></button>
+        </div>
       </section>
       <footer class="footer"><span>CB · Built for your next big thing.</span><span id="storageStatus"><span class="footer-dot"></span> Saved on this device</span><button id="limitationsBtn" class="footer-link">Alarm reliability & privacy</button></footer>
     </main>
@@ -132,8 +163,9 @@
     <a href="#overview" class="active" data-nav="overview"><span>⌂</span>Home</a>
     <a href="#alarms" data-nav="alarms"><span>◷</span>Alarms</a>
     <a href="#exam" data-nav="exam"><span>▤</span>Exams</a>
-    <a href="#schedule" data-nav="schedule"><span>▦</span>Schedule</a>
-    <a href="#settings" data-nav="settings"><span>⚙</span>Settings</a>
+    <a href="#schedule" data-nav="schedule"><span>▦</span>Plan</a>
+    <a href="#focus" data-nav="focus"><span>◎</span>Focus</a>
+    <a href="#more" data-nav="more"><span>•••</span>More</a>
   </nav>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <div class="ring-overlay" id="ringOverlay" hidden><div class="ring-card"><div class="ring-wave">♫</div><div class="eyebrow">WAKE UP, YOU'VE GOT THIS</div><h2 id="overlayAlarmName">Alarm ringing</h2><p id="overlayAlarmTime">It's time to get moving.</p><div class="ring-actions"><button class="secondary-button" id="overlayDismiss">Dismiss</button><button class="primary-button" id="overlaySnooze">Snooze</button></div></div></div>
