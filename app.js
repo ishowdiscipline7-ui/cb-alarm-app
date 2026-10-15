@@ -132,7 +132,7 @@
   $('markWakeBtn').addEventListener('click',()=>{const today=localDateKey();if((state.streak.dates||[]).includes(today)){toast('Already checked in today.');return}$('wakeConfirmDate').textContent=new Intl.DateTimeFormat(undefined,{weekday:'long',month:'long',day:'numeric'}).format(new Date());openDialog('wakeConfirmDialog')});
   $('confirmWakeBtn').addEventListener('click',()=>{const today=localDateKey(),dates=new Set(state.streak.dates||[]);if(dates.has(today)){closeDialog('wakeConfirmDialog');toast('Already checked in today.');return}dates.add(today);state.streak.dates=[...dates].sort().slice(-90);let count=0;const d=new Date();while(state.streak.dates.includes(localDateKey(d))){count++;d.setDate(d.getDate()-1)}state.streak.count=count;saveState();closeDialog('wakeConfirmDialog');renderWeek();toast('Wake-up confirmed! Streak: '+count+' day'+(count===1?'':'s')+'!')});
   $('limitationsBtn').addEventListener('click',()=>openDialog('infoDialog'));
-  const viewLabels={overview:'Dashboard',alarms:'Alarms',exam:'Exams & dates',schedule:'Schedule',focus:'Focus mode',soundLibrary:'Sound library',settings:'Settings',more:'More'};
+  const viewLabels={overview:'Home',alarms:'Alarms',exam:'Exams',schedule:'Plan',focus:'Focus',soundLibrary:'Sounds',settings:'Settings',more:'More'};
   function activateView(target,updateHash=true){
     if(!Object.prototype.hasOwnProperty.call(viewLabels,target))target='overview';
     document.querySelectorAll('.app-view').forEach(view=>{const active=view.dataset.view===target;view.classList.toggle('active',active);view.setAttribute('aria-hidden',String(!active))});
