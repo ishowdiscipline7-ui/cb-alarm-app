@@ -13,12 +13,14 @@ class CBAlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == "com.clearbefore.cb.STOP") {
             context.stopService(Intent(context, CBAlarmService::class.java))
+            CBAlarmActivity.finishIfOpen()
             return
         }
         if (intent.action == "com.clearbefore.cb.SNOOZE") {
             val minutes = intent.getIntExtra("snoozeMinutes", 5)
             if (minutes <= 0) return
             context.stopService(Intent(context, CBAlarmService::class.java))
+            CBAlarmActivity.finishIfOpen()
             val id = intent.getStringExtra("alarmId") ?: return
             val fire = Intent(context, CBAlarmReceiver::class.java).setAction("com.clearbefore.cb.FIRE").putExtra("alarmId", id)
             val pi = android.app.PendingIntent.getBroadcast(context, id.hashCode(), fire, android.app.PendingIntent.FLAG_UPDATE_CURRENT or android.app.PendingIntent.FLAG_IMMUTABLE)
