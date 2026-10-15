@@ -132,7 +132,23 @@
   $('markWakeBtn').addEventListener('click',()=>{const today=localDateKey();if((state.streak.dates||[]).includes(today)){toast('Already checked in today.');return}$('wakeConfirmDate').textContent=new Intl.DateTimeFormat(undefined,{weekday:'long',month:'long',day:'numeric'}).format(new Date());openDialog('wakeConfirmDialog')});
   $('confirmWakeBtn').addEventListener('click',()=>{const today=localDateKey(),dates=new Set(state.streak.dates||[]);if(dates.has(today)){closeDialog('wakeConfirmDialog');toast('Already checked in today.');return}dates.add(today);state.streak.dates=[...dates].sort().slice(-90);let count=0;const d=new Date();while(state.streak.dates.includes(localDateKey(d))){count++;d.setDate(d.getDate()-1)}state.streak.count=count;saveState();closeDialog('wakeConfirmDialog');renderWeek();toast('Wake-up confirmed! Streak: '+count+' day'+(count===1?'':'s')+'!')});
   $('limitationsBtn').addEventListener('click',()=>openDialog('infoDialog'));
-  document.querySelectorAll('[data-nav]').forEach(a=>a.addEventListener('click',()=>{const target=a.dataset.nav;document.querySelectorAll('[data-nav]').forEach(n=>n.classList.toggle('active',n.dataset.nav===target));const labels={overview:'Dashboard',alarms:'Alarms',exam:'Exams & dates',schedule:'Schedule',focus:'Focus mode',soundLibrary:'Sound library',settings:'Settings'};$('pageLabel').textContent=labels[target]||'Dashboard'}));
+  const viewLabels={overview:'Dashboard',alarms:'Alarms',exam:'Exams & dates',schedule:'Schedule',focus:'Focus mode',soundLibrary:'Sound library',settings:'Settings',more:'More'};
+  function activateView(target,updateHash=true){
+    if(!Object.prototype.hasOwnProperty.call(viewLabels,target))target='overview';
+    document.querySelectorAll('.app-view').forEach(view=>{const active=view.dataset.view===target;view.classList.toggle('active',active);view.setAttribute('aria-hidden',String(!active))});
+    document.querySelectorAll('.nav-list [data-nav]').forEach(n=>n.classList.toggle('active',n.dataset.nav===target));
+    document.querySelectorAll('.mobile-bottom-nav [data-nav]').forEach(n=>n.classList.toggle('active',n.dataset.nav===target||(['soundLibrary','settings'].includes(target)&&n.dataset.nav==='more')));
+    $('pageLabel').textContent=viewLabels[target];
+    if(updateHash&&window.history&&window.history.replaceState)window.history.replaceState(null,'','#'+target);
+    window.scrollTo(0,0);
+  }
+  document.querySelectorAll('.nav-list [data-nav],.mobile-bottom-nav [data-nav]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();activateView(a.dataset.nav)}));
+  document.querySelectorAll('[data-go-view]').forEach(b=>b.addEventListener('click',()=>activateView(b.dataset.goView)));
+  $('morePermissionsBtn').addEventListener('click',requestAlarmPermissions);
+  $('moreReliabilityBtn').addEventListener('click',()=>openDialog('infoDialog'));
+  const initialTarget=(window.location.hash||'').slice(1);
+  activateView(Object.prototype.hasOwnProperty.call(viewLabels,initialTarget)?initialTarget:'overview',false);
+  window.addEventListener('hashchange',()=>{const target=(window.location.hash||'').slice(1);if(Object.prototype.hasOwnProperty.call(viewLabels,target))activateView(target,false)});
   document.addEventListener('visibilitychange',()=>{if(!document.hidden){checkAlarms();renderExam();syncNativeAlarms()}});
   window.addEventListener('focus',()=>{checkAlarms();renderExam()});
   window.addEventListener('storage',e=>{if(e.key===STORAGE_KEY){state=loadState();renderAll()}});
