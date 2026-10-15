@@ -96,7 +96,12 @@ jobs:
           components = '''
               <receiver android:name="com.clearbefore.cb.CBAlarmReceiver" android:exported="false" />
               <receiver android:name="com.clearbefore.cb.CBBootReceiver" android:enabled="true" android:exported="false">
-                  <intent-filter><action android:name="android.intent.action.BOOT_COMPLETED" /></intent-filter>
+                  <intent-filter>
+                      <action android:name="android.intent.action.BOOT_COMPLETED" />
+                      <action android:name="android.intent.action.TIME_SET" />
+                      <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                      <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
+                  </intent-filter>
               </receiver>
               <service android:name="com.clearbefore.cb.CBAlarmService" android:exported="false" android:foregroundServiceType="mediaPlayback" />
               <activity android:name="com.clearbefore.cb.CBAlarmActivity" android:exported="false" android:excludeFromRecents="true" android:launchMode="singleTop" android:showWhenLocked="true" android:turnScreenOn="true" />
