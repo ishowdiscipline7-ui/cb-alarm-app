@@ -393,3 +393,59 @@ button,input,select,textarea{font-family:inherit}
  .alarm-time{font-size:calc(18px * var(--cb-font-scale,1))!important}
  .countdown-pills strong{font-size:calc(23px * var(--cb-font-scale,1))!important}
 }
+
+
+/* Independent app screens: show one destination at a time instead of one long page. */
+.app-view{display:none!important;min-height:calc(100vh - 150px);padding:10px 0 22px;scroll-margin-top:84px}
+.app-view.active{display:block!important;animation:cbScreenIn .18s ease-out}
+@keyframes cbScreenIn{from{opacity:.65;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.screen-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:18px 0 20px}
+.screen-heading h1{font-size:calc(30px * var(--cb-font-scale,1));letter-spacing:-1px;margin:9px 0 7px}
+.screen-heading .subtitle{max-width:650px}
+.dashboard-shortcuts{margin:4px 0 20px;background:#080808;border:1px solid #252525;border-radius:20px;padding:22px}
+.shortcut-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px}
+.shortcut-heading h2{font-size:calc(18px * var(--cb-font-scale,1));margin:5px 0 0;letter-spacing:-.4px}
+.shortcut-grid,.more-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.shortcut-card{display:flex;align-items:center;gap:12px;min-width:0;text-align:left;color:var(--text);padding:15px;background:#0e0e0e;border:1px solid #292929;border-radius:14px;cursor:pointer;transition:background .15s,border-color .15s,transform .15s}
+.shortcut-card:hover{background:#161616;border-color:#555;transform:translateY(-1px)}
+.shortcut-card:focus-visible{outline:2px solid #eee;outline-offset:3px}
+.shortcut-icon{flex:0 0 40px;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:#191919;border:1px solid #303030;font-size:20px;color:#f4f4f4}
+.shortcut-copy{flex:1;min-width:0;display:grid;gap:4px}
+.shortcut-copy strong{font-size:calc(13px * var(--cb-font-scale,1));font-weight:750}
+.shortcut-copy small{font-size:calc(10px * var(--cb-font-scale,1));color:#a6a6a6;line-height:1.4}
+.shortcut-arrow{font-size:18px;color:#ddd;margin-left:auto}
+.focus-screen-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:18px}
+.focus-screen-grid>.panel{margin:0;min-width:0}
+#view-alarms .alarms-panel,#view-exam .exam-panel,#view-schedule .schedule-panel,#view-soundLibrary .sound-library-panel,#view-settings .settings-panel{margin-top:10px}
+#view-exam .exam-panel{min-height:0}
+#view-alarms .alarm-list{margin-top:12px}
+#view-settings .settings-grid{max-width:920px}
+#view-settings .settings-permissions{max-width:920px}
+#view-more .more-grid{max-width:900px}
+.main-content{padding-bottom:24px}
+.mobile-bottom-nav{grid-template-columns:repeat(6,minmax(0,1fr))!important}
+.mobile-bottom-nav a{font-size:calc(8px * var(--cb-font-scale,1))!important;min-width:0;padding:7px 1px!important;white-space:nowrap}
+.mobile-bottom-nav a span{font-size:calc(17px * var(--cb-font-scale,1))!important}
+.mobile-bottom-nav a.active{box-shadow:inset 0 0 0 1px #3e3e3e!important}
+@media(max-width:900px){
+ .app-view{min-height:calc(100vh - 132px);padding-top:8px}
+ .focus-screen-grid{grid-template-columns:1fr}
+ .dashboard-shortcuts{padding:17px}
+}
+@media(max-width:620px){
+ .app-view{min-height:calc(100vh - 114px);padding:6px 0 20px}
+ .dashboard-shortcuts{border-radius:17px;padding:15px;margin-top:4px}
+ .shortcut-grid,.more-grid{grid-template-columns:1fr;gap:9px}
+ .shortcut-card{padding:12px;gap:10px}
+ .shortcut-icon{width:36px;height:36px;flex-basis:36px}
+ .shortcut-copy strong{font-size:calc(12px * var(--cb-font-scale,1))}
+ .shortcut-copy small{font-size:calc(10px * var(--cb-font-scale,1))}
+ .shortcut-heading h2{font-size:calc(17px * var(--cb-font-scale,1))}
+ .screen-heading{margin:14px 0 15px}
+ .screen-heading h1{font-size:calc(25px * var(--cb-font-scale,1))}
+ .mobile-bottom-nav{left:5px!important;right:5px!important;bottom:calc(5px + env(safe-area-inset-bottom))!important;padding:5px 3px!important;gap:1px}
+ .mobile-bottom-nav a{font-size:calc(7px * var(--cb-font-scale,1))!important;gap:3px!important}
+ .mobile-bottom-nav a span{font-size:calc(16px * var(--cb-font-scale,1))!important}
+ #view-alarms .panel,#view-exam .panel,#view-schedule .panel,#view-soundLibrary .panel,#view-settings .panel{padding:15px}
+}
+@media(prefers-reduced-motion:reduce){.app-view.active{animation:none}}
