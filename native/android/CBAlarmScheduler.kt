@@ -61,10 +61,40 @@ object CBAlarmScheduler {
             val manager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val pi = pending(context, id)
             try {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, candidate.timeInMillis, pi)
-                else manager.setExact(AlarmManager.RTC_WAKEUP, candidate.timeInMillis, pi)
+                // Alarm-clock alarms are the strongest user-visible exact alarm type.
+                // On Android 12+, exact-alarm access must be granted before using it.
+                val canUseExact = Build.VERSION.SDK_INT < Build.VERSION_CODES.S ||
+                    manager.canScheduleExactAlarms()
+                if (canUseExact) {
+                    val launchIntent = context.packageManager.getLaunchIntentForPackage(context.packageName)
+                    val showIntent = launchIntent?.let {
+                        PendingIntent.getActivity(
+                            context, 0, it,
+                            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                        )
+                    }
+                    manager.setAlarmClock(
+                        AlarmManager.AlarmClockInfo(candidate.timeInMillis, showIntent),
+                        pi
+                    )
+                } else {
+                    // Best-effort fallback only; Android may delay this without exact access.
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        manager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, candidate.timeInMillis, pi)
+                    } else {
+                        manager.set(AlarmManager.RTC_WAKEUP, candidate.timeInMillis, pi)
+                    }
+                }
             } catch (_: SecurityException) {
-                manager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, candidate.timeInMillis, pi)
+                // Permission can be revoked between checking and scheduling.
+                // Keep a fallback alarm rather than silently dropping the reminder.
+                try {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        manager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, candidate.timeInMillis, pi)
+                    } else {
+                        manager.set(AlarmManager.RTC_WAKEUP, candidate.timeInMillis, pi)
+                    }
+                } catch (_: Exception) { }
             }
             return
         }
