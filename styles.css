@@ -768,3 +768,164 @@ html, body { max-width: 100%; overflow-x: clip; }
     padding-bottom: 7px !important;
   }
 }
+
+
+/* Final mobile viewport fit: keep navigation fixed and each screen inside the
+   usable viewport. Dialog forms remain independently scrollable when needed. */
+@media (max-width: 900px) {
+  html, body {
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    margin: 0;
+    overflow: hidden !important;
+    overscroll-behavior: none;
+    touch-action: pan-x;
+  }
+  body { position: fixed; inset: 0; }
+  .app-shell {
+    display: block !important;
+    width: 100%;
+    height: 100dvh !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+  .main-content {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100%;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 12px 76px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    gap: 0 !important;
+  }
+  .topbar {
+    flex: 0 0 54px !important;
+    height: 54px !important;
+    min-height: 54px !important;
+    padding: 0 2px !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+  }
+  .topbar .breadcrumb { display: none !important; }
+  .topbar .top-actions { gap: 7px !important; }
+  .topbar .live-status { display: none !important; }
+  .app-view {
+    display: none !important;
+    flex: 1 1 0 !important;
+    width: 100%;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 4px 0 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+  .app-view.active {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .app-view > * { min-height: 0 !important; }
+  .app-view > .panel,
+  .app-view > section.panel {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+  }
+  .app-view .welcome-row {
+    flex: 0 0 auto !important;
+    padding: 5px 0 2px !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+  }
+  .app-view .welcome-row h1 { margin: 0 !important; }
+  .app-view .welcome-row .subtitle,
+  .app-view .welcome-row .eyebrow { display: none !important; }
+  .app-view .date-chip { padding: 6px 8px !important; }
+  .app-view .dashboard-streak-panel {
+    flex: 0 0 auto !important;
+    display: grid !important;
+    gap: 7px !important;
+    padding: 10px !important;
+  }
+  .app-view .dashboard-streak-panel .panel-description {
+    display: none !important;
+  }
+  .app-view .dashboard-streak-panel .week-strip { gap: 2px !important; }
+  .app-view .dashboard-streak-panel .week-day span {
+    width: 25px !important; height: 25px !important;
+    margin-top: 2px !important;
+  }
+  .app-view .dashboard-streak-panel #markWakeBtn {
+    min-height: 34px !important; padding: 5px 8px !important;
+  }
+  .app-view .dashboard-streak-panel .streak-note { display: none !important; }
+  .app-view .stats-grid {
+    flex: 0 0 auto !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 7px !important;
+  }
+  .app-view .stat-card { padding: 8px !important; min-width: 0 !important; }
+  .app-view .stat-value { font-size: 20px !important; line-height: 1.1 !important; }
+  .app-view .stat-foot { font-size: 10px !important; line-height: 1.15 !important; }
+  .app-view .stat-label { font-size: 9px !important; letter-spacing: .35px !important; }
+  .dashboard-shortcuts, .footer { display: none !important; }
+  .mobile-bottom-nav {
+    position: fixed !important;
+    left: 0 !important; right: 0 !important; bottom: 0 !important;
+    z-index: 50 !important;
+    height: calc(64px + env(safe-area-inset-bottom)) !important;
+    max-height: calc(64px + env(safe-area-inset-bottom)) !important;
+    box-sizing: border-box !important;
+    padding: 5px 3px calc(5px + env(safe-area-inset-bottom)) !important;
+    overflow: hidden !important;
+  }
+  .mobile-bottom-nav a { min-height: 48px !important; padding: 4px 0 !important; }
+  .mobile-bottom-nav a span { font-size: 19px !important; }
+  .screen-heading { flex: 0 0 auto !important; padding: 2px 0 !important; }
+  .screen-heading .subtitle { display: none !important; }
+  .app-view .panel { padding: 11px !important; border-radius: 14px !important; }
+  .app-view .panel-heading { margin-bottom: 7px !important; }
+  .app-view .panel-heading h2 { font-size: 19px !important; }
+  .app-view .panel-description { margin: 3px 0 7px !important; font-size: 11px !important; }
+  .app-view .primary-button, .app-view .secondary-button,
+  .app-view .text-button, .app-view .mini-action {
+    min-height: 34px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+  }
+  .app-view .exam-content { min-height: 0 !important; gap: 8px !important; }
+  .app-view .progress-art { transform: scale(.72); transform-origin: center; }
+  .app-view .sound-grid, .app-view .settings-grid,
+  .app-view .more-grid, .app-view .focus-screen-grid { min-height: 0 !important; gap: 7px !important; }
+  .app-view .sound-card { padding: 8px !important; min-width: 0 !important; }
+  .app-view .sound-card small,
+  .app-view .custom-sound-row small,
+  .app-view .setting-control small { display: none !important; }
+  .app-view .setting-control { gap: 3px !important; }
+  .app-view .setting-control .text-input { min-height: 36px !important; }
+  .app-view .settings-permissions { gap: 7px !important; padding-top: 7px !important; }
+  .app-view .settings-permissions small { display: none !important; }
+  .app-view .alarm-list, .app-view .exam-list, .app-view .schedule-list {
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+  .modal[open] {
+    max-height: calc(100dvh - 20px) !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+  }
+}
+@media (max-width: 380px) {
+  .main-content { padding-left: 8px !important; padding-right: 8px !important; }
+  .mobile-bottom-nav a { font-size: 8px !important; }
+  .app-view .panel { padding: 9px !important; }
+  .app-view .dashboard-streak-panel .week-day span { width: 22px !important; height: 22px !important; }
+}
