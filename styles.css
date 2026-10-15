@@ -545,3 +545,27 @@ button,input,select,textarea{font-family:inherit}
  .app-view .stat-label{font-size:9px!important}
  .dashboard-streak-panel{gap:10px!important}
 }
+
+
+/* Strip all card metadata and modal explanations; core values and actions remain. */
+.app-view .alarm-meta,
+.app-view .exam-list-copy small,
+.app-view .exam-list-date small,
+.app-view .schedule-copy small,
+.app-view .schedule-date small,
+.app-view .schedule-type,
+.app-view .inline-empty,
+.app-view .empty-state p,
+.app-view .empty-state .field-help,
+.modal .eyebrow,
+.modal p,
+.modal small,
+.modal .field-help,
+.modal .info-copy,
+.modal .upload-status,
+.modal .custom-sound-row small {display:none!important}
+.modal h2{margin-top:0!important}
+.modal .modal-heading{margin-bottom:16px!important}
+#view-exam .quick-exam-date small{display:none!important}
+#view-exam .exam-description{display:none!important}
+#view-more .shortcut-copy small{display:none!important}
