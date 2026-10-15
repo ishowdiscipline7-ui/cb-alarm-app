@@ -17,12 +17,7 @@
       <div class="sidebar-label">WORKSPACE</div>
       <nav class="nav-list" aria-label="Main navigation">
         <a class="nav-item active" href="#overview" data-nav="overview"><span class="nav-icon">⌂</span> Home</a>
-        <a class="nav-item" href="#alarms" data-nav="alarms"><span class="nav-icon">◷</span> Alarms <span class="nav-count" id="alarmNavCount">0</span></a>
-        <a class="nav-item" href="#exam" data-nav="exam"><span class="nav-icon">▤</span> Exams</a>
-        <a class="nav-item" href="#schedule" data-nav="schedule"><span class="nav-icon">▦</span> Schedule</a>
-        <a class="nav-item" href="#focus" data-nav="focus"><span class="nav-icon">◎</span> Focus</a>
-        <a class="nav-item" href="#soundLibrary" data-nav="soundLibrary"><span class="nav-icon">♫</span> Sounds</a>
-        <a class="nav-item" href="#settings" data-nav="settings"><span class="nav-icon">⚙</span> Settings</a>
+        <a class="nav-item" href="#more" data-nav="more"><span class="nav-icon">•••</span> More</a>
       </nav>
       <div class="sidebar-bottom">
         <div class="side-tip"><span class="tip-icon">✦</span><strong>Small steps count.</strong><p>Show up today. Your future self will thank you.</p></div>
@@ -50,8 +45,8 @@
         <article class="stat-card"><div class="stat-top"><span class="stat-label">WAKE-UP STREAK</span><span class="stat-icon orange">✦</span></div><div class="stat-value"><span id="streakValueMini">0</span> <small>days</small></div><div class="stat-foot">One day at a time</div></article>
         <article class="stat-card"><div class="stat-top"><span class="stat-label">ALARMS ACTIVE</span><span class="stat-icon green">✓</span></div><div class="stat-value" id="activeAlarmValue">0</div><div class="stat-foot">Ready when you are</div></article>
       </section>
-        <section class="dashboard-shortcuts" aria-label="">
-          <div class="shortcut-heading"><div><div class="eyebrow">YOUR WORKSPACE</div><h2>Shortcuts</h2></div><span class="soft-badge"></span></div>
+        <section class="dashboard-shortcuts" aria-label="Quick access to the main tools">
+          <div class="shortcut-heading"><div><div class="eyebrow">QUICK ACCESS</div><h2>Open a tool</h2></div><span class="soft-badge"></span></div>
           <div class="shortcut-grid">
             <button type="button" class="shortcut-card" data-go-view="alarms" onclick="return window.CBNavigate('alarms')"><span class="shortcut-icon">◷</span><span class="shortcut-copy"><strong>Alarms</strong><small>Manage times, repeats and snooze</small></span><span class="shortcut-arrow">→</span></button>
             <button type="button" class="shortcut-card" data-go-view="exam" onclick="return window.CBNavigate('exam')"><span class="shortcut-icon">▤</span><span class="shortcut-copy"><strong>Exams</strong><small>Keep every exam date in view</small></span><span class="shortcut-arrow">→</span></button>
@@ -164,11 +159,7 @@
   <dialog id="infoDialog" class="modal"><div class="modal-heading"><div><div class="eyebrow">GOOD TO KNOW</div><h2>Info</h2></div><button type="button" class="close-button" data-close="infoDialog" aria-label="Close">×</button></div><div class="info-copy"><p><strong>Keep CB open for alarms.</strong> Browser timers can be delayed when a tab is backgrounded, a device sleeps, the browser is closed, or the operating system suspends the app. This website cannot guarantee a sound at an exact time when it is closed.</p><p><strong>Notifications are best-effort.</strong> Allow notifications for visible-page alerts, but browser notifications are not a guaranteed alarm clock. For critical exam wake-ups, set a second alarm in your phone's native Clock app.</p><p><strong>Your privacy.</strong> Alarms, exam details, streaks and settings are saved in this browser on this device. Uploaded audio is stored in local browser storage. Clearing site data can remove it. No account or server is required by this version.</p><p><strong>Audio permission.</strong> Browsers may require a user interaction before audio can play. Tap the page or test the sound before relying on it.</p></div><div class="modal-actions"><button class="primary-button" data-close="infoDialog">Got it</button></div></dialog>
   <nav class="mobile-bottom-nav" aria-label="Quick navigation">
     <a href="#overview" class="active" data-nav="overview"><span>⌂</span>Home</a>
-    <a href="#alarms" data-nav="alarms"><span>◷</span>Alarms</a>
     <a href="#streak" data-nav="streak"><span>✦</span>Streak</a>
-    <a href="#exam" data-nav="exam"><span>▤</span>Exams</a>
-    <a href="#schedule" data-nav="schedule"><span>▦</span>Plan</a>
-    <a href="#focus" data-nav="focus"><span>◎</span>Focus</a>
     <a href="#more" data-nav="more"><span>•••</span>More</a>
   </nav>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
