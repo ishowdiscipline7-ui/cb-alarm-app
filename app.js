@@ -1,6 +1,35 @@
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
+  /* Navigation is initialised first, before any optional app feature can interrupt startup. */
+  const viewLabels={overview:'Home',alarms:'Alarms',exam:'Exams',schedule:'Plan',focus:'Study tracker',soundLibrary:'Sounds',settings:'Settings',more:'More'};
+  function activateView(target,updateHash=true){
+    if(!Object.prototype.hasOwnProperty.call(viewLabels,target))target='overview';
+    document.querySelectorAll('.app-view').forEach(view=>{const active=view.dataset.view===target;view.classList.toggle('active',active);view.setAttribute('aria-hidden',String(!active))});
+    document.querySelectorAll('.nav-list [data-nav]').forEach(n=>n.classList.toggle('active',n.dataset.nav===target));
+    document.querySelectorAll('.mobile-bottom-nav [data-nav]').forEach(n=>n.classList.toggle('active',n.dataset.nav===target||(['soundLibrary','settings'].includes(target)&&n.dataset.nav==='more')));
+    const label=$('pageLabel'); if(label)label.textContent=viewLabels[target];
+    if(updateHash&&window.history&&window.history.replaceState)window.history.replaceState(null,'','#'+target);
+    if(target==='overview')window.scrollTo(0,0);
+  }
+  window.CBNavigate = target => { activateView(target); return false; };
+  document.addEventListener('click',e=>{
+    const card=e.target&&e.target.closest?e.target.closest('[data-go-view]'):null;
+    if(card){e.preventDefault();activateView(card.getAttribute('data-go-view'));return;}
+    const nav=e.target&&e.target.closest?e.target.closest('.nav-list [data-nav],.mobile-bottom-nav [data-nav]'):null;
+    if(!nav)return;
+    e.preventDefault();
+    if(nav.dataset.nav==='streak'&&nav.closest('.mobile-bottom-nav')){
+      activateView('overview',false);
+      document.querySelectorAll('.mobile-bottom-nav [data-nav]').forEach(n=>n.classList.toggle('active',n.dataset.nav==='streak'));
+      if(window.history&&window.history.replaceState)window.history.replaceState(null,'','#streak');
+      $('streak')?.scrollIntoView({behavior:'smooth',block:'start'});
+      return;
+    }
+    activateView(nav.dataset.nav);
+  },true);
+  const initialTarget=(window.location.hash||'').slice(1);
+  activateView(Object.prototype.hasOwnProperty.call(viewLabels,initialTarget)?initialTarget:'overview',false);
   const STORAGE_KEY = 'cb-exam-alarm-v1';
   const defaults = {alarms:[], exam:null, exams:[], events:[], streak:{dates:[],count:0}, subjects:[], studySessions:[], settings:{fontFamily:'system',fontScale:100,defaultSnooze:5,defaultSound:'gentle'}, uploadedSound:null, focusMinutes:25};
   let state = loadState(), audioContext = null, ringingAlarm = null, ringInterval = null, toastTimer = null, soundPreviewAudio = null;
@@ -143,34 +172,8 @@
   $('markWakeBtn').addEventListener('click',()=>{const today=localDateKey();if((state.streak.dates||[]).includes(today)){toast('Already checked in today.');return}$('wakeConfirmDate').textContent=new Intl.DateTimeFormat(undefined,{weekday:'long',month:'long',day:'numeric'}).format(new Date());openDialog('wakeConfirmDialog')});
   $('confirmWakeBtn').addEventListener('click',()=>{const today=localDateKey(),dates=new Set(state.streak.dates||[]);if(dates.has(today)){closeDialog('wakeConfirmDialog');toast('Already checked in today.');return}dates.add(today);state.streak.dates=[...dates].sort().slice(-90);let count=0;const d=new Date();while(state.streak.dates.includes(localDateKey(d))){count++;d.setDate(d.getDate()-1)}state.streak.count=count;saveState();closeDialog('wakeConfirmDialog');renderWeek();toast('Wake-up confirmed! Streak: '+count+' day'+(count===1?'':'s')+'!')});
   $('limitationsBtn').addEventListener('click',()=>openDialog('infoDialog'));
-  const viewLabels={overview:'Home',alarms:'Alarms',exam:'Exams',schedule:'Plan',focus:'Study tracker',soundLibrary:'Sounds',settings:'Settings',more:'More'};
-  function activateView(target,updateHash=true){
-    if(!Object.prototype.hasOwnProperty.call(viewLabels,target))target='overview';
-    document.querySelectorAll('.app-view').forEach(view=>{const active=view.dataset.view===target;view.classList.toggle('active',active);view.setAttribute('aria-hidden',String(!active))});
-    document.querySelectorAll('.nav-list [data-nav]').forEach(n=>n.classList.toggle('active',n.dataset.nav===target));
-    document.querySelectorAll('.mobile-bottom-nav [data-nav]').forEach(n=>n.classList.toggle('active',n.dataset.nav===target||(['soundLibrary','settings'].includes(target)&&n.dataset.nav==='more')));
-    $('pageLabel').textContent=viewLabels[target];
-    if(updateHash&&window.history&&window.history.replaceState)window.history.replaceState(null,'','#'+target);
-    window.scrollTo(0,0);
-  }
-  document.querySelectorAll('.nav-list [data-nav],.mobile-bottom-nav [data-nav]').forEach(a=>a.addEventListener('click',e=>{
-    e.preventDefault();
-    if(a.dataset.nav==='streak'&&a.closest('.mobile-bottom-nav')){
-      activateView('overview',false);
-      document.querySelectorAll('.mobile-bottom-nav [data-nav]').forEach(n=>n.classList.toggle('active',n.dataset.nav==='streak'));
-      if(window.history&&window.history.replaceState)window.history.replaceState(null,'','#streak');
-      $('streak')?.scrollIntoView({behavior:'smooth',block:'start'});
-      return;
-    }
-    activateView(a.dataset.nav);
-  }));
-  /* Delegate shortcut clicks at document level so nested icons/text and late-rendered cards work reliably. */
-  document.addEventListener('click',e=>{const card=e.target&&e.target.closest?e.target.closest('[data-go-view]'):null;if(!card)return;const target=card.getAttribute('data-go-view');if(!Object.prototype.hasOwnProperty.call(viewLabels,target))return;e.preventDefault();e.stopPropagation();activateView(target);},true);
-  document.querySelectorAll('[data-go-view]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();const target=b.dataset.goView;if(Object.prototype.hasOwnProperty.call(viewLabels,target))activateView(target);else toast('This section is not available yet.')}));
   $('morePermissionsBtn').addEventListener('click',requestAlarmPermissions);
   $('moreReliabilityBtn').addEventListener('click',()=>openDialog('infoDialog'));
-  const initialTarget=(window.location.hash||'').slice(1);
-  activateView(Object.prototype.hasOwnProperty.call(viewLabels,initialTarget)?initialTarget:'overview',false);
   window.addEventListener('hashchange',()=>{const target=(window.location.hash||'').slice(1);if(Object.prototype.hasOwnProperty.call(viewLabels,target))activateView(target,false)});
   document.addEventListener('visibilitychange',()=>{if(!document.hidden){checkAlarms();renderExam();syncNativeAlarms()}});
   window.addEventListener('focus',()=>{checkAlarms();renderExam()});
