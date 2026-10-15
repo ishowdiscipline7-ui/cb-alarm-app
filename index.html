@@ -20,8 +20,8 @@
         <a class="nav-item" href="#alarms" data-nav="alarms"><span class="nav-icon">◷</span> Alarms <span class="nav-count" id="alarmNavCount">0</span></a>
         <a class="nav-item" href="#exam" data-nav="exam"><span class="nav-icon">▤</span> Exams & dates</a>
         <a class="nav-item" href="#schedule" data-nav="schedule"><span class="nav-icon">▦</span> Schedule</a>
-        <a class="nav-item" href="#focus" data-nav="focus"><span class="nav-icon">◎</span> Focus mode</a>
-        <a class="nav-item" href="#soundLibrary" data-nav="soundLibrary"><span class="nav-icon">♫</span> Sound library</a>
+        <a class="nav-item" href="#focus" data-nav="focus"><span class="nav-icon">◎</span> Focus</a>
+        <a class="nav-item" href="#soundLibrary" data-nav="soundLibrary"><span class="nav-icon">♫</span> Sounds</a>
         <a class="nav-item" href="#settings" data-nav="settings"><span class="nav-icon">⚙</span> Settings</a>
       </nav>
       <div class="sidebar-bottom">
@@ -39,37 +39,37 @@
 
       <section class="app-view active" id="view-overview" data-view="overview" aria-labelledby="greeting">
               <section class="welcome-row">
-        <div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR PERSONAL STUDY SPACE</div><h1 id="greeting">Make today <span>count.</span></h1><p class="subtitle">A little progress every day adds up to something big.</p></div>
+        <div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR PERSONAL STUDY SPACE</div><h1 id="greeting">Today</h1><p class="subtitle">A little progress every day adds up to something big.</p></div>
         <div class="date-chip"><span class="calendar-icon">▦</span><div><strong id="todayDate">Today</strong><small id="todayDay">Your day, planned</small></div></div>
       </section>
-        <article class="panel streak-panel dashboard-streak-panel"><div class="panel-heading"><div><div class="eyebrow">YOUR MORNING WINS</div><h2>Wake-up streak</h2></div><span class="streak-flame">✦</span></div><p class="panel-description">Build your streak one morning at a time. Confirm today when you are up and ready.</p><div class="week-strip" id="weekStrip"></div><button class="secondary-button full-width" id="markWakeBtn">✓ Mark today complete</button><div class="streak-note" id="streakNote">Your next streak starts with one check-in.</div></article>
+        <article class="panel streak-panel dashboard-streak-panel"><div class="panel-heading"><div><div class="eyebrow">STREAK</div><h2>Streak</h2></div><span class="streak-flame">✦</span></div><p class="panel-description">Build your streak one morning at a time. Confirm today when you are up and ready.</p><div class="week-strip" id="weekStrip"></div><button class="secondary-button full-width" id="markWakeBtn">✓ Done</button><div class="streak-note" id="streakNote">Your next streak starts with one check-in.</div></article>
               <section class="stats-grid" aria-label="Your stats">
         <article class="stat-card"><div class="stat-top"><span class="stat-label">NEXT ALARM</span><span class="stat-icon purple">◷</span></div><div class="stat-value" id="nextAlarmValue">--:--</div><div class="stat-foot" id="nextAlarmFoot">Add an alarm to get started</div></article>
         <article class="stat-card"><div class="stat-top"><span class="stat-label">EXAM IN</span><span class="stat-icon blue">▤</span></div><div class="stat-value" id="examDaysValue">— <small>days</small></div><div class="stat-foot" id="examNameFoot">Set your next big date</div></article>
         <article class="stat-card"><div class="stat-top"><span class="stat-label">WAKE-UP STREAK</span><span class="stat-icon orange">✦</span></div><div class="stat-value"><span id="streakValueMini">0</span> <small>days</small></div><div class="stat-foot">One day at a time</div></article>
         <article class="stat-card"><div class="stat-top"><span class="stat-label">ALARMS ACTIVE</span><span class="stat-icon green">✓</span></div><div class="stat-value" id="activeAlarmValue">0</div><div class="stat-foot">Ready when you are</div></article>
       </section>
-        <section class="dashboard-shortcuts" aria-label="Quick access">
-          <div class="shortcut-heading"><div><div class="eyebrow">YOUR WORKSPACE</div><h2>Jump back in</h2></div><span class="soft-badge">Quick access</span></div>
+        <section class="dashboard-shortcuts" aria-label="">
+          <div class="shortcut-heading"><div><div class="eyebrow">YOUR WORKSPACE</div><h2>Shortcuts</h2></div><span class="soft-badge"></span></div>
           <div class="shortcut-grid">
             <button type="button" class="shortcut-card" data-go-view="alarms"><span class="shortcut-icon">◷</span><span class="shortcut-copy"><strong>Alarms</strong><small>Manage times, repeats and snooze</small></span><span class="shortcut-arrow">→</span></button>
-            <button type="button" class="shortcut-card" data-go-view="exam"><span class="shortcut-icon">▤</span><span class="shortcut-copy"><strong>Exams & countdowns</strong><small>Keep every exam date in view</small></span><span class="shortcut-arrow">→</span></button>
+            <button type="button" class="shortcut-card" data-go-view="exam"><span class="shortcut-icon">▤</span><span class="shortcut-copy"><strong>Exams</strong><small>Keep every exam date in view</small></span><span class="shortcut-arrow">→</span></button>
             <button type="button" class="shortcut-card" data-go-view="schedule"><span class="shortcut-icon">▦</span><span class="shortcut-copy"><strong>Schedule</strong><small>Deadlines and important dates</small></span><span class="shortcut-arrow">→</span></button>
-            <button type="button" class="shortcut-card" data-go-view="focus"><span class="shortcut-icon">◎</span><span class="shortcut-copy"><strong>Focus session</strong><small>Start your next study sprint</small></span><span class="shortcut-arrow">→</span></button>
+            <button type="button" class="shortcut-card" data-go-view="focus"><span class="shortcut-icon">◎</span><span class="shortcut-copy"><strong>Focus</strong><small>Start your next study sprint</small></span><span class="shortcut-arrow">→</span></button>
           </div>
         </section>
       </section>
 
       <section class="app-view" id="view-alarms" data-view="alarms" aria-labelledby="alarmsTitle">
                   <article class="panel alarms-panel" id="alarms">
-            <div class="panel-heading"><div><div class="eyebrow">BE READY</div><h2 id="alarmsTitle">Your alarms <span class="heading-count" id="alarmHeadingCount">0</span></h2></div><button class="text-button" id="addAlarmLink">＋ Add alarm</button></div>
-            <div class="alarm-list" id="alarmList"><div class="empty-state"><div class="empty-clock">◷</div><strong>No alarms yet</strong><p>Create an alarm for your study routine or exam morning.</p><button class="secondary-button" id="emptyAddBtn">Create your first alarm</button></div></div>
+            <div class="panel-heading"><div><div class="eyebrow">BE READY</div><h2 id="alarmsTitle">Alarms <span class="heading-count" id="alarmHeadingCount">0</span></h2></div><button class="text-button" id="addAlarmLink">＋ Add</button></div>
+            <div class="alarm-list" id="alarmList"><div class="empty-state"><div class="empty-clock">◷</div><strong>No alarms yet</strong><p>Alarm for your study routine or exam morning.</p><button class="secondary-button" id="emptyAddBtn">Create</button></div></div>
           </article>
       </section>
 
       <section class="app-view" id="view-exam" data-view="exam" aria-labelledby="examScreenTitle">
                   <article class="panel exam-panel" id="exam">
-            <div class="panel-heading"><div><div class="eyebrow">THE BIG DAYS</div><h2 id="examScreenTitle">Exams & countdown</h2></div><div class="panel-heading-actions"><button class="text-button" id="editExamBtn">Edit next</button><button class="text-button" id="addExamBtn">＋ Add exam</button></div></div>
+            <div class="panel-heading"><div><div class="eyebrow">THE BIG DAYS</div><h2 id="examScreenTitle">Exams</h2></div><div class="panel-heading-actions"><button class="text-button" id="editExamBtn">Edit</button><button class="text-button" id="addExamBtn">＋ Add</button></div></div>
             <div class="exam-content"><div class="exam-copy"><div class="exam-name" id="examName">Your next exam</div><p id="examDescription">Every focused session brings you closer.</p><div class="countdown-pills"><div><strong id="countDays">—</strong><span>DAYS</span></div><i>:</i><div><strong id="countHours">—</strong><span>HOURS</span></div><i>:</i><div><strong id="countMinutes">—</strong><span>MINUTES</span></div></div><div class="quick-exam-date"><label for="examQuickDate">Exam date</label><input class="text-input" id="examQuickDate" type="date" aria-describedby="quickExamHelp"><small id="quickExamHelp">Choose a date — your countdown saves automatically.</small></div></div><div class="progress-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><div class="art-core"><span>✦</span><strong id="artDays">?</strong><small>DAYS LEFT</small></div><div class="art-star star-a">✦</div><div class="art-star star-b">✧</div><div class="art-star star-c">·</div></div></div>
             <div class="exam-list" id="examList"></div>
           </article>
@@ -77,23 +77,23 @@
 
       <section class="app-view" id="view-schedule" data-view="schedule" aria-labelledby="scheduleScreenTitle">
               <section class="panel schedule-panel" id="schedule">
-        <div class="panel-heading"><div><div class="eyebrow">YOUR PLAN</div><h2 id="scheduleScreenTitle">Schedule & important dates</h2></div><button class="text-button" id="addEventBtn">＋ Add date</button></div>
+        <div class="panel-heading"><div><div class="eyebrow">YOUR PLAN</div><h2 id="scheduleScreenTitle">Schedule</h2></div><button class="text-button" id="addEventBtn">＋ Add</button></div>
         <p class="panel-description">Keep exams, deadlines, and personal milestones in one simple timeline.</p>
         <div class="schedule-list" id="eventList"><div class="inline-empty">Your upcoming dates will appear here.</div></div>
       </section>
       </section>
 
       <section class="app-view" id="view-focus" data-view="focus" aria-labelledby="focusScreenTitle">
-        <div class="screen-heading"><div><div class="eyebrow">STUDY ROUTINE</div><h1 id="focusScreenTitle">Focus mode</h1><p class="subtitle">Give one task your full attention and build momentum.</p></div></div>
+        <div class="screen-heading"><div><div class="eyebrow">STUDY ROUTINE</div><h1 id="focusScreenTitle">Focus</h1><p class="subtitle">Give one task your full attention and build momentum.</p></div></div>
         <div class="focus-screen-grid">
-                    <article class="panel routine-panel" id="focus"><div class="panel-heading"><div><div class="eyebrow">STAY CONSISTENT</div><h2>Focus session</h2></div><span class="soft-badge">Deep work</span></div><p class="panel-description">Give one task your full attention. Start small and build momentum.</p><div class="focus-ring" id="focusRing"><div class="focus-inner"><span id="focusStatus">READY</span><strong id="focusTime">25:00</strong><small>MINUTES</small></div></div><div class="focus-controls"><button class="primary-button full-width" id="focusStartBtn">Start focus <span>▶</span></button><button class="secondary-button full-width" id="focusResetBtn">Reset timer</button></div><div class="focus-presets"><button class="preset active" data-minutes="25">25 min</button><button class="preset" data-minutes="45">45 min</button><button class="preset" data-minutes="60">60 min</button></div></article>
+                    <article class="panel routine-panel" id="focus"><div class="panel-heading"><div><div class="eyebrow">STAY CONSISTENT</div><h2>Focus</h2></div><span class="soft-badge">Deep work</span></div><p class="panel-description">Give one task your full attention. Start small and build momentum.</p><div class="focus-ring" id="focusRing"><div class="focus-inner"><span id="focusStatus">READY</span><strong id="focusTime">25:00</strong><small>MINUTES</small></div></div><div class="focus-controls"><button class="primary-button full-width" id="focusStartBtn">Start <span>▶</span></button><button class="secondary-button full-width" id="focusResetBtn">Reset</button></div><div class="focus-presets"><button class="preset active" data-minutes="25">25 min</button><button class="preset" data-minutes="45">45 min</button><button class="preset" data-minutes="60">60 min</button></div></article>
                     
         </div>
       </section>
 
       <section class="app-view" id="view-soundLibrary" data-view="soundLibrary" aria-labelledby="soundScreenTitle">
               <section class="panel sound-library-panel" id="soundLibrary">
-        <div class="panel-heading"><div><div class="eyebrow">MAKE IT YOURS</div><h2 id="soundScreenTitle">Sound library</h2></div><span class="soft-badge" id="soundLibraryStatus">Built-in sounds</span></div>
+        <div class="panel-heading"><div><div class="eyebrow">MAKE IT YOURS</div><h2 id="soundScreenTitle">Sounds</h2></div><span class="soft-badge" id="soundLibraryStatus">Built-in sounds</span></div>
         <p class="panel-description">Preview alarm tones and choose the default sound for new alarms.</p>
         <div class="sound-grid">
           <article class="sound-card"><span class="sound-card-icon">♫</span><strong>Gentle chime</strong><small>Soft wake-up tone</small><div><button class="mini-action" data-preview-sound="gentle">Preview</button><button class="mini-action" data-choose-sound="gentle">Use sound</button></div></article>
@@ -120,46 +120,46 @@
       <section class="app-view" id="view-more" data-view="more" aria-labelledby="moreScreenTitle">
         <div class="screen-heading"><div><div class="eyebrow">MORE TOOLS</div><h1 id="moreScreenTitle">More</h1><p class="subtitle">Personalise CB or choose the sound for your alarms.</p></div></div>
         <div class="more-grid">
-          <button type="button" class="shortcut-card" data-go-view="soundLibrary"><span class="shortcut-icon">♫</span><span class="shortcut-copy"><strong>Sound library</strong><small>Preview and pick alarm tones</small></span><span class="shortcut-arrow">→</span></button>
+          <button type="button" class="shortcut-card" data-go-view="soundLibrary"><span class="shortcut-icon">♫</span><span class="shortcut-copy"><strong>Sounds</strong><small>Preview and pick alarm tones</small></span><span class="shortcut-arrow">→</span></button>
           <button type="button" class="shortcut-card" data-go-view="settings"><span class="shortcut-icon">⚙</span><span class="shortcut-copy"><strong>Settings</strong><small>Font size, typeface and defaults</small></span><span class="shortcut-arrow">→</span></button>
           <button type="button" class="shortcut-card" id="morePermissionsBtn"><span class="shortcut-icon">♧</span><span class="shortcut-copy"><strong>Alarm permissions</strong><small>Check Android notification settings</small></span><span class="shortcut-arrow">→</span></button>
           <button type="button" class="shortcut-card" id="moreReliabilityBtn"><span class="shortcut-icon">ⓘ</span><span class="shortcut-copy"><strong>Reliability & privacy</strong><small>How CB alarms work on your device</small></span><span class="shortcut-arrow">→</span></button>
         </div>
       </section>
-      <footer class="footer"><span>CB · Built for your next big thing.</span><span id="storageStatus"><span class="footer-dot"></span> Saved on this device</span><button id="limitationsBtn" class="footer-link">Alarm reliability & privacy</button></footer>
+      <footer class="footer"><span>CB · Built for your next big thing.</span><span id="storageStatus"><span class="footer-dot"></span> Saved on this device</span><button id="limitationsBtn" class="footer-link">Info</button></footer>
     </main>
   </div>
 
 
   <dialog id="alarmDialog" class="modal">
     <form id="alarmForm" method="dialog">
-      <div class="modal-heading"><div><div class="eyebrow">MAKE IT HAPPEN</div><h2 id="alarmDialogTitle">Create an alarm</h2></div><button type="button" class="close-button" data-close="alarmDialog" aria-label="Close">×</button></div>
+      <div class="modal-heading"><div><div class="eyebrow">MAKE IT HAPPEN</div><h2 id="alarmDialogTitle">Alarm</h2></div><button type="button" class="close-button" data-close="alarmDialog" aria-label="Close">×</button></div>
       <input type="hidden" id="alarmId">
       <label class="field-label" for="alarmLabel">Alarm name</label><input class="text-input" id="alarmLabel" maxlength="60" placeholder="e.g. Morning revision" required>
       <div class="field-row"><div class="field"><label class="field-label" for="alarmTime">Time</label><input class="text-input time-input" id="alarmTime" type="time" required></div><div class="field"><label class="field-label" for="alarmSound">Sound</label><select class="text-input" id="alarmSound"><option value="gentle">Gentle chime</option><option value="classic">Classic alarm</option><option value="pulse">Focus pulse</option><option value="uploaded">My uploaded sound</option></select></div></div>
       <label class="field-label">Repeat</label><div class="days-picker" id="daysPicker"><label><input type="checkbox" value="1"><span>M</span></label><label><input type="checkbox" value="2"><span>T</span></label><label><input type="checkbox" value="3"><span>W</span></label><label><input type="checkbox" value="4"><span>T</span></label><label><input type="checkbox" value="5"><span>F</span></label><label><input type="checkbox" value="6"><span>S</span></label><label><input type="checkbox" value="0"><span>S</span></label></div><p class="field-help">Leave all days unselected for a one-time alarm.</p>
       <div class="field-row"><div class="field"><label class="field-label" for="snoozeMinutes">Snooze</label><select class="text-input" id="snoozeMinutes"><option value="5">5 minutes</option><option value="10">10 minutes</option><option value="15">15 minutes</option><option value="0">Off</option></select></div><div class="field"><label class="field-label" for="soundUpload">Custom sound</label><input class="text-input file-input" id="soundUpload" type="file" accept="audio/*"><small class="field-help" id="uploadStatus">Optional audio file, stored locally.</small></div></div>
-      <div class="modal-actions"><button type="button" class="secondary-button" data-close="alarmDialog">Cancel</button><button type="submit" class="primary-button">Save alarm <span>→</span></button></div>
+      <div class="modal-actions"><button type="button" class="secondary-button" data-close="alarmDialog">Cancel</button><button type="submit" class="primary-button">Save <span>→</span></button></div>
     </form>
   </dialog>
 
   <dialog id="examDialog" class="modal">
-    <form id="examForm" method="dialog"><div class="modal-heading"><div><div class="eyebrow">PLAN YOUR MILESTONE</div><h2 id="examDialogTitle">Add an exam</h2></div><button type="button" class="close-button" data-close="examDialog" aria-label="Close">×</button></div><input type="hidden" id="examId"><label class="field-label" for="examInputName">Exam name</label><input class="text-input" id="examInputName" maxlength="80" placeholder="e.g. Final examination" required><label class="field-label" for="examDate">Exam date</label><input class="text-input" id="examDate" type="date" required><label class="field-label" for="examTime">Start time (optional)</label><input class="text-input" id="examTime" type="time" value="09:00"><label class="field-label" for="examDescInput">A note to yourself (optional)</label><textarea class="text-input" id="examDescInput" rows="3" maxlength="180" placeholder="Keep going. You're closer than you think."></textarea><div class="modal-actions"><button type="button" class="secondary-button" data-close="examDialog">Cancel</button><button type="submit" class="primary-button">Save exam date <span>→</span></button></div></form>
+    <form id="examForm" method="dialog"><div class="modal-heading"><div><div class="eyebrow">PLAN YOUR MILESTONE</div><h2 id="examDialogTitle">Exam</h2></div><button type="button" class="close-button" data-close="examDialog" aria-label="Close">×</button></div><input type="hidden" id="examId"><label class="field-label" for="examInputName">Exam name</label><input class="text-input" id="examInputName" maxlength="80" placeholder="e.g. Final examination" required><label class="field-label" for="examDate">Exam date</label><input class="text-input" id="examDate" type="date" required><label class="field-label" for="examTime">Start time (optional)</label><input class="text-input" id="examTime" type="time" value="09:00"><label class="field-label" for="examDescInput">A note to yourself (optional)</label><textarea class="text-input" id="examDescInput" rows="3" maxlength="180" placeholder="Keep going. You're closer than you think."></textarea><div class="modal-actions"><button type="button" class="secondary-button" data-close="examDialog">Cancel</button><button type="submit" class="primary-button">Save <span>→</span></button></div></form>
   </dialog>
 
   <dialog id="eventDialog" class="modal">
-    <form id="eventForm" method="dialog"><div class="modal-heading"><div><div class="eyebrow">PUT IT ON YOUR PLAN</div><h2 id="eventDialogTitle">Add important date</h2></div><button type="button" class="close-button" data-close="eventDialog" aria-label="Close">×</button></div>
+    <form id="eventForm" method="dialog"><div class="modal-heading"><div><div class="eyebrow">PUT IT ON YOUR PLAN</div><h2 id="eventDialogTitle">Date</h2></div><button type="button" class="close-button" data-close="eventDialog" aria-label="Close">×</button></div>
       <input type="hidden" id="eventId">
       <label class="field-label" for="eventTitle">Title</label><input class="text-input" id="eventTitle" maxlength="80" placeholder="e.g. Application deadline" required>
       <div class="field-row"><div class="field"><label class="field-label" for="eventType">Type</label><select class="text-input" id="eventType"><option value="important">Important date</option><option value="deadline">Deadline</option><option value="study">Study session</option><option value="personal">Personal</option></select></div><div class="field"><label class="field-label" for="eventDate">Date</label><input class="text-input" id="eventDate" type="date" required></div></div>
       <label class="field-label" for="eventTime">Time (optional)</label><input class="text-input" id="eventTime" type="time" value="09:00">
       <label class="field-label" for="eventDescription">Note (optional)</label><textarea class="text-input" id="eventDescription" rows="2" maxlength="180" placeholder="What do you need to remember?"></textarea>
-      <div class="modal-actions"><button type="button" class="secondary-button" data-close="eventDialog">Cancel</button><button type="submit" class="primary-button">Save date <span>→</span></button></div>
+      <div class="modal-actions"><button type="button" class="secondary-button" data-close="eventDialog">Cancel</button><button type="submit" class="primary-button">Save <span>→</span></button></div>
     </form>
   </dialog>
-  <dialog id="alertDialog" class="modal alert-modal"><div class="alert-symbol">♫</div><div class="eyebrow">IT'S TIME</div><h2 id="ringTitle">Alarm</h2><p id="ringMessage">Your next step starts now.</p><div class="alert-actions"><button class="secondary-button" id="dismissAlarmBtn">Dismiss</button><button class="primary-button" id="snoozeAlarmBtn">Snooze 5 min</button></div></dialog>
-  <dialog id="wakeConfirmDialog" class="modal"><div class="modal-heading"><div><div class="eyebrow">WAKE-UP CHECK-IN</div><h2>Confirm your wake-up</h2></div><button type="button" class="close-button" data-close="wakeConfirmDialog" aria-label="Close">×</button></div><p class="panel-description">Did you get up and complete your morning routine today?</p><div class="wake-confirm-date" id="wakeConfirmDate">Today</div><div class="modal-actions"><button type="button" class="secondary-button" data-close="wakeConfirmDialog">Not yet</button><button type="button" class="primary-button" id="confirmWakeBtn">Yes, confirm wake-up ✓</button></div></dialog>
-  <dialog id="infoDialog" class="modal"><div class="modal-heading"><div><div class="eyebrow">GOOD TO KNOW</div><h2>Alarm reliability & privacy</h2></div><button type="button" class="close-button" data-close="infoDialog" aria-label="Close">×</button></div><div class="info-copy"><p><strong>Keep CB open for alarms.</strong> Browser timers can be delayed when a tab is backgrounded, a device sleeps, the browser is closed, or the operating system suspends the app. This website cannot guarantee a sound at an exact time when it is closed.</p><p><strong>Notifications are best-effort.</strong> Allow notifications for visible-page alerts, but browser notifications are not a guaranteed alarm clock. For critical exam wake-ups, set a second alarm in your phone's native Clock app.</p><p><strong>Your privacy.</strong> Alarms, exam details, streaks and settings are saved in this browser on this device. Uploaded audio is stored in local browser storage. Clearing site data can remove it. No account or server is required by this version.</p><p><strong>Audio permission.</strong> Browsers may require a user interaction before audio can play. Tap the page or test the sound before relying on it.</p></div><div class="modal-actions"><button class="primary-button" data-close="infoDialog">Got it</button></div></dialog>
+  <dialog id="alertDialog" class="modal alert-modal"><div class="alert-symbol">♫</div><div class="eyebrow">IT'S TIME</div><h2 id="ringTitle">Alarm</h2><p id="ringMessage">Your next step starts now.</p><div class="alert-actions"><button class="secondary-button" id="dismissAlarmBtn">Stop</button><button class="primary-button" id="snoozeAlarmBtn">Snooze 5 min</button></div></dialog>
+  <dialog id="wakeConfirmDialog" class="modal"><div class="modal-heading"><div><div class="eyebrow">WAKE-UP CHECK-IN</div><h2>Wake-up</h2></div><button type="button" class="close-button" data-close="wakeConfirmDialog" aria-label="Close">×</button></div><p class="panel-description">Did you get up and complete your morning routine today?</p><div class="wake-confirm-date" id="wakeConfirmDate">Today</div><div class="modal-actions"><button type="button" class="secondary-button" data-close="wakeConfirmDialog">Not yet</button><button type="button" class="primary-button" id="confirmWakeBtn">Yes, confirm wake-up ✓</button></div></dialog>
+  <dialog id="infoDialog" class="modal"><div class="modal-heading"><div><div class="eyebrow">GOOD TO KNOW</div><h2>Info</h2></div><button type="button" class="close-button" data-close="infoDialog" aria-label="Close">×</button></div><div class="info-copy"><p><strong>Keep CB open for alarms.</strong> Browser timers can be delayed when a tab is backgrounded, a device sleeps, the browser is closed, or the operating system suspends the app. This website cannot guarantee a sound at an exact time when it is closed.</p><p><strong>Notifications are best-effort.</strong> Allow notifications for visible-page alerts, but browser notifications are not a guaranteed alarm clock. For critical exam wake-ups, set a second alarm in your phone's native Clock app.</p><p><strong>Your privacy.</strong> Alarms, exam details, streaks and settings are saved in this browser on this device. Uploaded audio is stored in local browser storage. Clearing site data can remove it. No account or server is required by this version.</p><p><strong>Audio permission.</strong> Browsers may require a user interaction before audio can play. Tap the page or test the sound before relying on it.</p></div><div class="modal-actions"><button class="primary-button" data-close="infoDialog">Got it</button></div></dialog>
   <nav class="mobile-bottom-nav" aria-label="Quick navigation">
     <a href="#overview" class="active" data-nav="overview"><span>⌂</span>Home</a>
     <a href="#alarms" data-nav="alarms"><span>◷</span>Alarms</a>
@@ -169,6 +169,6 @@
     <a href="#more" data-nav="more"><span>•••</span>More</a>
   </nav>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <div class="ring-overlay" id="ringOverlay" hidden><div class="ring-card"><div class="ring-wave">♫</div><div class="eyebrow">WAKE UP, YOU'VE GOT THIS</div><h2 id="overlayAlarmName">Alarm ringing</h2><p id="overlayAlarmTime">It's time to get moving.</p><div class="ring-actions"><button class="secondary-button" id="overlayDismiss">Dismiss</button><button class="primary-button" id="overlaySnooze">Snooze</button></div></div></div>
+  <div class="ring-overlay" id="ringOverlay" hidden><div class="ring-card"><div class="ring-wave">♫</div><div class="eyebrow">WAKE UP, YOU'VE GOT THIS</div><h2 id="overlayAlarmName">Alarm ringing</h2><p id="overlayAlarmTime">It's time to get moving.</p><div class="ring-actions"><button class="secondary-button" id="overlayStop">Stop</button><button class="primary-button" id="overlaySnooze">Snooze</button></div></div></div>
 </body>
 </html>
