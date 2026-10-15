@@ -477,3 +477,33 @@ button,input,select,textarea{font-family:inherit}
  .dashboard-streak-panel .week-day span{width:29px;height:29px;margin-top:5px}
  .dashboard-streak-panel .week-day{font-size:calc(9px * var(--cb-font-scale,1))}
 }
+
+
+/* Clean, minimal interface: remove repeated labels and secondary explanatory copy. */
+.eyebrow,.sidebar-label,.side-tip,.profile,.live-status,.breadcrumb span{display:none!important}
+.panel-description,.subtitle,.shortcut-copy small,.date-chip small,.setting-control small,.settings-permissions small,.sound-card small,.custom-sound-row small,.footer-link{display:none!important}
+.welcome-row{padding:26px 0 18px!important}
+.welcome-row h1{margin:0 0 5px!important;letter-spacing:-1.1px!important}
+.dashboard-streak-panel{box-shadow:none!important;background:#101010!important;border-color:#292929!important}
+.panel,.dashboard-shortcuts,.shortcut-card,.stat-card,.date-chip,.sound-card{box-shadow:none!important}
+.panel{border-color:#292929!important}
+.panel-heading{margin-bottom:16px!important}
+.panel-heading h2,.shortcut-heading h2{letter-spacing:-.5px!important}
+.shortcut-card{min-height:68px!important;background:#141414!important;border-color:#292929!important}
+.shortcut-icon{background:#202020!important;color:#eee!important}
+.primary-button{background:#f1f1f1!important;color:#080808!important;box-shadow:none!important}
+.secondary-button,.mini-action{background:#171717!important;border-color:#333!important;color:#eee!important;box-shadow:none!important}
+.nav-item.active{background:#242424!important;color:#fff!important}
+.brand-mark{background:#eee!important;color:#080808!important;box-shadow:none!important}
+.dashboard-streak-panel .panel-heading h2{margin-top:0!important}
+.dashboard-streak-panel .panel-description{display:none!important}
+.dashboard-streak-panel{grid-template-areas:"heading week" "button week" "note week"!important;row-gap:12px!important}
+@media(max-width:900px){
+ .dashboard-streak-panel{grid-template-areas:"heading" "week" "button" "note"!important}
+}
+@media(max-width:620px){
+ .welcome-row{padding:20px 0 14px!important}
+ .welcome-row h1{font-size:27px!important}
+ .dashboard-streak-panel{padding:14px!important}
+ .panel-heading{margin-bottom:12px!important}
+}
