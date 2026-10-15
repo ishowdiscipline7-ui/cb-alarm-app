@@ -569,3 +569,96 @@ button,input,select,textarea{font-family:inherit}
 #view-exam .quick-exam-date small{display:none!important}
 #view-exam .exam-description{display:none!important}
 #view-more .shortcut-copy small{display:none!important}
+
+
+/* Functional, larger layout refresh */
+.eyebrow,.sidebar-label{display:flex!important}
+.side-tip{display:block!important}
+.profile{display:flex!important}
+.live-status{display:flex!important}
+.breadcrumb span{display:inline!important}
+.panel-description,.subtitle,.app-view p,.app-view .stat-foot,.app-view .streak-note,
+.app-view .shortcut-copy small,.app-view .field-help,.app-view .empty-state p,
+.app-view .inline-empty,.app-view .setting-control small,.app-view .settings-permissions small,
+.app-view .sound-card small,.app-view .custom-sound-row small,.app-view .quick-exam-date small,
+.app-view .date-chip small,.app-view .alarm-meta,.app-view .exam-list-copy small,
+.app-view .exam-list-date small,.app-view .schedule-copy small,.app-view .schedule-date small,
+.app-view .schedule-type,.modal p,.modal .field-help,.modal .info-copy,.modal small,
+.modal .custom-sound-row small{display:block!important}
+.app-view .soft-badge{display:inline-flex!important}
+.app-view .countdown-pills span{display:block!important}
+.modal .eyebrow{display:flex!important}
+.dashboard-streak-panel .panel-description{display:block!important}
+.app-view .streak-note{display:block!important}
+.app-view .footer-link{display:inline!important}
+.dashboard-shortcuts{display:none!important}
+body{font-size:16px!important}
+.main-content{padding-left:32px;padding-right:32px}
+.welcome-row h1{font-size:clamp(32px,3vw,42px)!important}
+.panel{padding:24px!important}
+.panel-heading h2,.shortcut-heading h2{font-size:26px!important}
+.screen-heading h1{font-size:32px!important}
+.stat-card{padding:20px!important}
+.stat-label{font-size:12px!important;letter-spacing:1px!important}
+.stat-value{font-size:32px!important}
+.stat-foot,.panel-description,.subtitle{font-size:14px!important;line-height:1.55!important}
+.nav-item{font-size:16px!important;padding:14px!important}
+.primary-button,.secondary-button,.text-button,.mini-action{font-size:15px!important;min-height:46px}
+.text-input,input,select,textarea{font-size:16px!important;min-height:48px}
+.field-label,.setting-control>span{font-size:15px!important}
+.alarm-time{font-size:24px!important}
+.alarm-name,.exam-list-copy strong,.schedule-copy strong{font-size:16px!important}
+.focus-inner strong{font-size:42px!important}
+.mobile-bottom-nav{display:none!important}
+@media(min-width:901px){
+ .sidebar{display:flex!important}
+ .mobile-bottom-nav{display:none!important}
+ .main-content{margin-left:248px;padding-left:36px;padding-right:36px}
+}
+@media(max-width:900px){
+ .sidebar{display:none!important}
+ .main-content{margin-left:0;padding-left:18px;padding-right:18px}
+ .mobile-bottom-nav{
+   display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr))!important;
+   position:fixed;z-index:20;left:0!important;right:0!important;
+   bottom:0!important;padding:7px 4px calc(8px + env(safe-area-inset-bottom))!important;
+   gap:2px!important;border-radius:0!important;border:0!important;border-top:1px solid #303030!important;
+   background:rgba(5,5,5,.98)!important;box-shadow:0 -8px 24px #0008!important;backdrop-filter:blur(18px)
+ }
+ .mobile-bottom-nav a{min-width:0!important;min-height:58px;padding:7px 1px!important;gap:4px!important;
+   display:flex;flex-direction:column;align-items:center;justify-content:center;
+   font-size:10px!important;line-height:1.15!important;white-space:nowrap}
+ .mobile-bottom-nav a span{font-size:22px!important;line-height:1.1!important}
+ .app-view{padding-bottom:104px!important;min-height:calc(100vh - 105px)}
+ .panel{padding:21px!important}
+ .panel-heading h2{font-size:25px!important}
+ .stat-value{font-size:30px!important}
+ .stat-card{padding:17px!important}
+ .stat-label{font-size:11px!important}
+ .dashboard-streak-panel{grid-template-columns:1fr!important;grid-template-areas:"heading" "copy" "week" "button" "note"!important;gap:14px!important}
+ .dashboard-streak-panel .week-strip{max-width:100%;width:100%;gap:6px}
+ .dashboard-streak-panel .week-day{font-size:12px!important}
+ .dashboard-streak-panel .week-day span{width:36px;height:36px;margin-top:6px}
+ .dashboard-streak-panel #markWakeBtn{width:100%!important;min-height:50px!important}
+}
+@media(max-width:620px){
+ .main-content{padding-left:14px;padding-right:14px}
+ .topbar{height:62px}
+ .welcome-row{padding:22px 0 18px!important;gap:12px}
+ .welcome-row h1{font-size:30px!important}
+ .date-chip{padding:10px 12px}
+ .stats-grid{gap:10px}
+ .stat-card{padding:15px!important;min-width:0}
+ .stat-label{font-size:10px!important;letter-spacing:.5px!important}
+ .stat-value{font-size:27px!important}
+ .stat-foot{font-size:12px!important}
+ .panel{padding:17px!important;border-radius:18px!important}
+ .panel-heading h2{font-size:23px!important}
+ .primary-button,.secondary-button,.text-button,.mini-action{min-height:48px}
+ .text-input,input,select,textarea{min-height:50px}
+ .alarm-time{font-size:22px!important}
+ .screen-heading h1{font-size:29px!important}
+ .dashboard-streak-panel .week-day span{width:32px;height:32px}
+ .mobile-bottom-nav a{font-size:9px!important}
+ .mobile-bottom-nav a span{font-size:21px!important}
+}
