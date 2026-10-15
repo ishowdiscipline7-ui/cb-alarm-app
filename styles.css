@@ -936,3 +936,14 @@ html, body { max-width: 100%; overflow-x: clip; }
 .rank-copy{flex:1;min-width:0}.rank-copy h2{font:800 18px Manrope;margin:2px 0}.rank-copy p{font-size:11px;color:#aaa;margin:3px 0 0;line-height:1.4}.rank-stats{text-align:right;min-width:58px}.rank-stats strong,.rank-stats small{display:block}.rank-stats strong{font:800 16px Manrope}.rank-stats small{font-size:8px;letter-spacing:1px;color:#aaa}
 .subject-picker-row{display:flex;gap:8px;align-items:center;margin:8px 0}.subject-picker-row select{flex:1;min-width:0}.subject-picker-row button{white-space:nowrap;padding:10px 12px}.subject-add-row{display:flex;gap:8px;margin:8px 0 14px}.subject-add-row[hidden]{display:none}.subject-add-row input{flex:1;min-width:0}.subject-add-row button{padding:9px 13px}.subject-summary{border-top:1px solid #303030;margin-top:20px;padding-top:15px}.subject-summary .panel-heading{margin-bottom:9px}.subject-summary h3{font:700 13px Manrope;margin:0}.subject-time-list{display:grid;gap:7px}.subject-time-row{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #292929;background:#111;border-radius:11px;padding:10px 12px}.subject-time-copy{display:grid;min-width:0}.subject-time-copy strong{font-size:12px;overflow-wrap:anywhere}.subject-time-copy small{font-size:10px;color:#999}.subject-time-value{font:700 12px Manrope;white-space:nowrap}.routine-panel #focusStartBtn:disabled{opacity:.45;cursor:not-allowed}
 @media(max-width:620px){.rank-panel{gap:10px;padding:12px}.rank-mark{width:36px;height:36px;flex-basis:36px}.rank-copy h2{font-size:16px}.rank-copy p{font-size:10px}.rank-stats strong{font-size:13px}.subject-picker-row{align-items:stretch}.subject-picker-row button{padding:9px}.subject-time-row{padding:9px 10px}}
+
+
+/* Study tracker: keep the workspace compact and the add flow focused. */
+#view-focus .focus-screen-grid{grid-template-columns:minmax(0,760px);}
+#view-focus .routine-panel{width:100%;}
+#view-focus .subject-picker-row{gap:10px;}
+#view-focus #addSubjectToggle{min-width:112px;}
+#view-focus .subject-help{margin:3px 0 14px;line-height:1.5;}
+#subjectDialog{max-width:min(440px,calc(100vw - 28px));}
+#subjectDialog .panel-description{margin:0 0 18px;}
+@media(max-width:620px){#view-focus .focus-screen-grid{grid-template-columns:minmax(0,1fr);}#view-focus .routine-panel{padding:15px;}#view-focus #addSubjectToggle{min-width:0;padding-inline:10px;}}
